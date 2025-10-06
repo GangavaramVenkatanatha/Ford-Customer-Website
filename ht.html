@@ -1,0 +1,978 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Ford Customer Portal</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <style>
+    body, html {
+      margin:0;
+      padding:0;
+      font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;
+      background:#f5f7fa;
+      color:#222;
+    }
+    .container {
+      max-width:1200px;
+      margin:0 auto;
+      padding:0 20px 54px;
+    }
+    header{
+      background:linear-gradient(90deg,#002a55,#001a33);
+      color:#fff;
+      padding:15px 0;
+      position:sticky;
+      top:0;
+      z-index:100;
+    }
+    .header-content{
+      max-width:1200px;
+      margin:0 auto;
+      padding:0 20px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+    }
+    .logo{
+      display:flex;
+      align-items:center;
+    }
+    .logo img{
+      height:40px;
+      margin-right:10px;
+    }
+    .logo h1{
+      font-size:26px;
+      font-weight:800;
+    }
+    nav ul{
+      display:flex;
+      list-style:none;
+      padding:0;
+      margin:0;
+    }
+    nav li{
+      margin-left:24px;
+    }
+    nav li:first-child{
+      margin-left:0;
+    }
+    nav a{
+      color:#fff;
+      font-weight:600;
+      text-decoration:none;
+      padding:8px 14px;
+      border-radius:6px;
+      transition:background-color 0.3s;
+      cursor: pointer;
+    }
+    nav a.active, nav a:hover{
+      background:rgba(255,255,255,0.15);
+      color:#67b7ff;
+    }
+    .hero{
+      background:url('https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&w=1500&q=80') center/cover;
+      position:relative;
+      height:260px;
+    }
+    .hero::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:rgba(0,42,90,0.74);
+    }
+    .hero-content{
+      position:relative;
+      z-index:1;
+      min-height:180px;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      align-items:center;
+      color:#fff;
+      text-align:center;
+      padding-top:30px;
+    }
+    .hero-content h2{
+      font-size:2.2rem;
+      margin-bottom:10px;
+      font-weight:700;
+      text-shadow:0 3px 10px #0008;
+    }
+    .hero-content p{
+      font-size:1.23rem;
+      max-width:700px;
+      text-shadow:0 1px 6px #0007;
+    }
+    .section-title{
+      text-align:center;
+      margin: 36px 0 28px;
+      color:#01356c;
+    }
+    .section-title h2{
+      font-size:2rem;
+      font-weight:700;
+      margin-bottom:8px;
+    }
+    .section-title p{
+      font-size:1.1em;
+      color: #555;
+    }
+    .login-section{
+      max-width:420px;
+      background:#fff;
+      border-radius:12px;
+      padding:32px 28px;
+      margin:0 auto 55px;
+      box-shadow:0 8px 36px rgba(0,42,90,0.15);
+    }
+    .login-section label{
+      margin-bottom:7px;
+      display:block;
+      color:#003366;
+      font-weight:700;
+    }
+    .login-section input{
+      width:100%;
+      font-size:16px;
+      padding:12px 14px;
+      border-radius:7px;
+      border:1px solid #c6def6;
+      margin-bottom:19px;
+      box-sizing: border-box;
+    }
+    .login-section button{
+      width:100%;
+      padding:14px 0;
+      font-size:18px;
+      border-radius:8px;
+      font-weight:700;
+      background:#0053a4;
+      color:white;
+      border:none;
+      margin-bottom:0;
+      cursor:pointer;
+      box-sizing: border-box;
+    }
+    .login-section button:hover{
+      background:#003970;
+    }
+    .form-footer{
+      margin-top:18px;
+      text-align:center;
+    }
+    .form-footer a{
+      color:#004280;
+      margin:0 11px;
+      text-decoration:none;
+      font-weight:600;
+      cursor:pointer;
+    }
+    .form-footer a:hover{
+      text-decoration:underline;
+    }
+    .dashboard{
+      display:none;
+      background:#fff;
+      border-radius:14px;
+      max-width:1100px;
+      margin:0 auto 54px;
+      box-shadow:0 10px 32px rgba(0,45,105,0.12);
+      padding:38px 32px 48px;
+    }
+    .dashboard-header{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      border-bottom:2px solid #d2e2ff;
+      margin-bottom:32px;
+      padding-bottom:18px;
+    }
+    .dashboard-header h2{
+      font-weight:900;
+      font-size:26px;
+    }
+    .dashboard-header button{
+      background:#c81f23;
+      color:#fff;padding:11px 26px;
+      border-radius:8px;
+      border:none;
+      font-weight:700;
+      font-size:16px;
+      cursor:pointer;
+      transition:background 0.2s;
+    }
+    .dashboard-header button:hover{
+      background:#70080c;
+    }
+    .facilities{
+      display: flex;
+      flex-wrap: wrap;
+      gap:26px;
+      justify-content:space-between;
+    }
+    .facility-card{
+      background:linear-gradient(135deg,#0081ff,#00d2fd);
+      color:white;
+      border-radius:24px;
+      padding:35px 32px 34px;
+      box-shadow:0 15px 44px rgba(0,110,255,0.18);
+      cursor:pointer;
+      flex: 1 1 310px;
+      display: flex;
+      flex-direction: column;
+      transition:transform 0.28s ease, box-shadow 0.28s;
+    }
+    .facility-card:hover{
+      transform: translateY(-12px);
+      box-shadow:0 20px 48px 0 rgba(0,110,255,0.36);
+    }
+    .facility-card .icon{
+      font-size:40px;
+      margin-bottom:29px;
+    }
+    .facility-card h3{
+      font-size:22px;
+      font-weight:900;
+      margin-bottom:13px;
+    }
+    .facility-card p{
+      font-size:16px;
+      line-height:1.53;
+    }
+    .info-panel{
+      display:none;
+      background:#e6f7ff;
+      border-radius:20px;
+      max-width:690px;
+      margin:50px auto 62px;
+      padding:38px 36px 36px;
+      box-shadow:0 12px 33px rgba(0,110,255,0.16);
+    }
+    .info-panel h4 {
+      color:#0057a4;
+      font-size:26px;
+      font-weight:900;
+      margin-bottom:24px;
+    }
+    .info-panel label {
+      font-size:16px;
+      font-weight:700;
+      margin-bottom:8px;
+      color:#005080;
+      display:block;
+    }
+    .info-panel input,.info-panel textarea,.info-panel select{
+      font-size:15px;
+      width:100%;
+      padding:10px 14px;
+      margin-bottom:19px;
+      border-radius:8px;
+      border:1px solid #b8e1ff;
+      font-family:inherit;
+      box-sizing:border-box;
+    }
+    .info-panel textarea {
+      min-height:80px;
+      resize:vertical;
+    }
+    .info-panel button.submit-btn {
+      background:#0d77ff;
+      color:white;
+      font-weight:800;
+      border:none;
+      width:100%;
+      padding:14px 0;
+      border-radius:12px;
+      margin-top:8px;
+      font-size:17px;
+      cursor:pointer;
+    }
+    .info-panel button.submit-btn:hover {
+      background:#004080;
+    }
+    .info-panel .message {
+      min-height:22px;
+      font-size:15px;
+    }
+    .models-list{
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px,1fr));
+      gap:28px;
+      margin-top:18px;
+    }
+    .model-card {
+      background:#e0f1ff;
+      padding:27px 18px 29px;
+      border-radius:17px;
+      box-shadow:0 9px 30px rgba(0,101,215,0.10);
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items:center;
+      transition: box-shadow 0.3s, transform 0.3s;
+    }
+    .model-card:hover {
+      transform: translateY(-10px);
+      box-shadow:0 18px 48px rgba(0, 101, 215, 0.20);
+    }
+    .model-card img {
+      max-width:120px;
+      margin-bottom:18px;
+      border-radius:13px;
+    }
+    .model-card h3 {
+      font-size:20px;
+      color:#004c90;
+      margin-bottom:8px;
+      font-weight:700;
+    }
+    .model-card p {
+      font-size:15px;
+      color:#0060c8;
+      margin-bottom:14px;
+    }
+    .model-card .customize-btn {
+      background:#0071cc;
+      color:white;
+      font-size:15px;
+      font-weight:700;
+      border:none;
+      border-radius:10px;
+      padding:12px 24px;
+      margin-top:auto;
+      cursor:pointer;
+    }
+    .model-card .customize-btn:hover{
+      background:#004288;
+    }
+    .custom-modal {
+      display:none;
+      position:fixed;
+      inset:0;
+      background:rgba(0,36,92,0.8);
+      backdrop-filter:blur(6px);
+      justify-content:center;
+      align-items:center;
+      z-index:20000;
+    }
+    .custom-modal.active {
+      display:flex;
+    }
+    .custom-modal-content {
+      background:white;
+      border-radius:17px;
+      max-width:400px;
+      padding:32px 28px 38px;
+      position:relative;
+      box-shadow:0 18px 70px rgba(0,98,200,0.42);
+    }
+    .custom-modal-close {
+      position:absolute;
+      top:20px;
+      right:28px;
+      font-size:28px;
+      font-weight:900;
+      color:#0053a4;
+      background:transparent;
+      border:none;
+      cursor:pointer;
+    }
+    .modal-title {
+      font-size:23px;
+      font-weight:900;
+      color:#004288;
+      text-align:center;
+      margin-bottom:23px;
+    }
+    .modal-form-group {
+      margin-bottom:20px;
+    }
+    .modal-form-group label {
+      font-weight:700;
+      margin-bottom:7px;
+      color:#004080;
+      display:block;
+    }
+    .btn-modal-submit {
+      width:100%;
+      padding:14px 0;
+      font-weight:900;
+      font-size:18px;
+      background:#005bb3;
+      border-radius:12px;
+      border:none;
+      color:white;
+      cursor:pointer;
+    }
+    .btn-modal-submit:hover{
+      background:#003d73;
+    }
+    .services,.supports{
+      display:flex;
+      flex-wrap:wrap;
+      gap:27px;
+      justify-content:center;
+    }
+    .service-card, .support-card{
+      background:linear-gradient(135deg,#0077ff,#00bfff);
+      color:#fff;
+      border-radius:18px;
+      padding:32px 27px 30px;
+      box-shadow:0 12px 28px rgba(0,120,255,0.29);
+      min-width:220px;
+      flex:1 1 220px;
+    }
+    .service-card h3, .support-card h3 {
+      font-size:20px;
+      font-weight:800;
+      margin-bottom:12px;
+    }
+    .service-card p, .support-card p {
+      font-size:15px;
+    }
+    .service-card button,.support-card button {
+      margin-top:17px;
+      background: #fff;
+      color:#0066cc;
+      font-weight:700;
+      border: none;
+      padding: 10px 22px;
+      border-radius: 12px;
+      cursor: pointer;
+      font-size: 16px;
+      transition: background 0.2s;
+    }
+    .service-card button:hover,.support-card button:hover {
+      background: #e0f0ff;
+    }
+    @media (max-width: 800px) {
+      .facilities, .services, .supports {
+        flex-direction:column;
+      }
+      .facility-card,.service-card,.support-card {
+        flex-basis: 100%;
+        max-width:unset;
+      }
+      .custom-modal-content {
+        max-width:90vw;
+      }
+    }
+    #notification {
+      position: fixed;
+      top: 22px;
+      right: 25px;
+      background: #28a745;
+      color: #fff;
+      padding: 16px 28px;
+      border-radius: 13px;
+      font-weight: 800;
+      font-size: 18px;
+      box-shadow: 0 8px 29px rgba(0,0,0,0.18);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.28s;
+      z-index: 99999;
+    }
+    #notification.show {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    /* Contact Section Styling */
+    #contactSection {
+      background: #fff;
+      border-radius: 20px;
+      max-width: 900px;
+      margin: 50px auto 62px;
+      padding: 40px 32px;
+      box-shadow: 0 12px 35px rgba(0, 42, 90, 0.15);
+      color: #003366;
+      font-weight: 600;
+      font-size: 17px;
+      line-height: 1.6;
+    }
+    #contactSection .section-title h2 {
+      color: #002a55;
+      font-weight: 900;
+      margin-bottom: 12px;
+      text-align: center;
+      font-size: 2.2rem;
+    }
+    #contactSection .section-title p {
+      text-align: center;
+      color: #555;
+      margin-bottom: 32px;
+      font-weight: 500;
+      font-size: 1.1rem;
+    }
+    #contactSection > div {
+      display: flex;
+      gap: 48px;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: flex-start;
+    }
+    #contactSection > div > div:first-child {
+      background: #f0f6fc;
+      border-radius: 16px;
+      padding: 28px 24px;
+      box-shadow: 0 5px 20px rgba(0, 42, 90, 0.07);
+      flex-basis: 360px;
+      font-weight: 500;
+      color: #004080;
+      line-height: 1.5;
+    }
+    #contactSection > div > div:first-child h3 {
+      font-weight: 800;
+      font-size: 1.4rem;
+      margin-bottom: 14px;
+      color: #002f61;
+      border-bottom: 2px solid #0071cc;
+      padding-bottom: 6px;
+    }
+    #contactSection > div > div:first-child p {
+      margin: 6px 0;
+      font-size: 1rem;
+      color: #003366;
+      font-weight: 600;
+    }
+    #contactSection form {
+      flex-grow: 1;
+      max-width: 460px;
+      background: #eef6ff;
+      padding: 30px 28px;
+      border-radius: 16px;
+      box-shadow: 0 6px 24px rgba(0, 80, 160, 0.1);
+      display: flex;
+      flex-direction: column;
+    }
+    #contactSection form input,
+    #contactSection form textarea {
+      font-size: 16px;
+      font-weight: 600;
+      padding: 14px 16px;
+      margin-bottom: 20px;
+      border-radius: 10px;
+      border: 1.8px solid #a8c2ff;
+      color: #004080;
+      outline-offset: 2px;
+      transition: border-color 0.3s ease;
+      font-family: inherit;
+      box-sizing: border-box;
+    }
+    #contactSection form input:focus,
+    #contactSection form textarea:focus {
+      border-color: #0051b4;
+      background: #e6f0ff;
+    }
+    #contactSection form button {
+      padding: 16px 0;
+      font-weight: 900;
+      font-size: 19px;
+      border-radius: 14px;
+      border: none;
+      background: #004080;
+      color: white;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    #contactSection form button:hover {
+      background-color: #002950;
+    }
+    #createAccountForm {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="header-content container">
+      <div class="logo">
+        <img src="https://www.ford.com/favicon.ico" alt="Ford" />
+        <h1>Ford Customer Portal</h1>
+      </div>
+      <nav>
+        <ul>
+          <li><a href="#" class="active" data-section="home">Home</a></li>
+          <li><a href="#" data-section="vehicles">Vehicles</a></li>
+          <li><a href="#" data-section="services">Services</a></li>
+          <li><a href="#" data-section="support">Support</a></li>
+          <li><a href="#" data-section="contact">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+  <section class="hero">
+    <div></div>
+    <div class="hero-content container">
+      <h2>Welcome to Your Ford Customer Portal</h2>
+      <p>Access exclusive services, manage your vehicle, and enjoy premium owner benefits.</p>
+    </div>
+  </section>
+  <div class="container main-content">
+    <!-- Home Section -->
+    <section id="homeSection">
+      <div class="login-section" id="loginSection">
+        <div class="section-title" id="formTitle">
+          <h2>Customer Login</h2>
+          <p id="formSubtitle">Access your personalized Ford account</p>
+        </div>
+        <form id="loginForm">
+          <label for="email">Email Address</label>
+          <input id="email" type="email" placeholder="Enter your email" required />
+          <label for="password">Password</label>
+          <input id="password" type="password" placeholder="Enter your password" required />
+          <button class="btn" type="submit">Login</button>
+          <div class="form-footer">
+            <a href="#" id="showForgot">Forgot password?</a> |
+            <a href="#" id="toggleForm">Create account</a>
+          </div>
+        </form>
+        <form id="createAccountForm">
+          <label for="createName">Full Name</label>
+          <input id="createName" type="text" placeholder="Enter your full name" required />
+          <label for="createEmail">Email Address</label>
+          <input id="createEmail" type="email" placeholder="Enter your email" required />
+          <label for="createPassword">Password</label>
+          <input id="createPassword" type="password" placeholder="Create password" minlength="6" required />
+          <label for="confirmPassword">Confirm Password</label>
+          <input id="confirmPassword" type="password" placeholder="Confirm password" minlength="6" required />
+          <button class="btn" type="submit">Create Account</button>
+          <div class="form-footer">
+            <a href="#" id="backToLogin">Already have an account? Login</a>
+          </div>
+        </form>
+      </div>
+      <div class="dashboard" id="dashboard">
+        <div class="dashboard-header">
+          <h2>Welcome, <span id="userName"></span></h2>
+          <button id="logoutBtn">Logout</button>
+        </div>
+        <div class="section-title">
+          <h2>Customer Facilities</h2>
+          <p>Exclusive services and benefits for Ford owners</p>
+        </div>
+        <div class="facilities">
+          <div class="facility-card interactive-card" data-type="vehicle"><div class="icon"><i class="fas fa-car"></i></div><h3>Vehicle Management</h3><p>Track your vehicle and appointments.</p></div>
+          <div class="facility-card interactive-card" data-type="service"><div class="icon"><i class="fas fa-tools"></i></div><h3>Service & Maintenance</h3><p>Book, view, and share service needs.</p></div>
+          <div class="facility-card interactive-card" data-type="warranty"><div class="icon"><i class="fas fa-file-invoice"></i></div><h3>Warranty & Claims</h3><p>View warranty, submit and track claims.</p></div>
+          <div class="facility-card interactive-card" data-type="roadside"><div class="icon"><i class="fas fa-headset"></i></div><h3>Roadside Assistance</h3><p>Emergency help for your Ford 24/7.</p></div>
+          <div class="facility-card interactive-card" data-type="remote"><div class="icon"><i class="fas fa-key"></i></div><h3>Remote Features</h3><p>Lock, unlock, or start your vehicle remotely.</p></div>
+          <div class="facility-card interactive-card" data-type="rewards"><div class="icon"><i class="fas fa-star"></i></div><h3>Rewards Program</h3><p>Earn points and enjoy Ford owner rewards.</p></div>
+        </div>
+        <div id="vehiclePanel" class="info-panel"></div>
+        <div id="servicePanel" class="info-panel"></div>
+        <div id="warrantyPanel" class="info-panel"></div>
+        <div id="roadsidePanel" class="info-panel"></div>
+        <div id="remotePanel" class="info-panel"></div>
+        <div id="rewardsPanel" class="info-panel"></div>
+      </div>
+    </section>
+    <!-- Vehicles Section -->
+    <section id="vehiclesSection" style="display:none;">
+      <div class="section-title">
+        <h2>Ford Vehicle Brochure</h2>
+        <p>Explore top Ford models and customize your dream car!</p>
+	<p><b>Note</b>: Click on the car name to see more info</p>
+      </div>
+      <div class="models-list">
+        <!-- Model cards for various Ford cars -->
+        <!-- ... same as original ... -->
+      </div>
+      <div class="custom-modal" id="customModal">
+        <div class="custom-modal-content">
+          <button class="custom-modal-close" id="closeModal">&times;</button>
+          <div class="modal-title" id="modalTitle"></div>
+          <form id="customForm">
+            <div class="modal-form-group">
+              <label for="color">Select Colour</label>
+              <select id="color" required>
+                <option value="">Choose Colour</option>
+                <option>Red</option><option>Blue</option><option>Black</option><option>White</option><option>Silver</option><option>Grey</option>
+              </select>
+            </div>
+            <div class="modal-form-group">
+              <label for="wheels">Select Wheels</label>
+              <select id="wheels" required>
+                <option value="">Choose Wheels</option>
+                <option>18 inch Alloy</option><option>19 inch Chrome</option><option>20 inch Sport</option>
+              </select>
+            </div>
+            <div class="modal-form-group">
+              <label for="accessories">Accessories</label>
+              <input type="text" id="accessories" placeholder="E.g., Sunroof, Roof Rack" />
+            </div>
+            <button type="submit" class="btn-modal-submit">Submit Customization</button>
+          </form>
+        </div>
+      </div>
+    </section>
+    <!-- Services Section -->
+    <section id="servicesSection" style="display:none;">
+      <div class="section-title"><h2>Services</h2><p>Keep your Ford at its best!</p></div>
+      <div class="services">
+        <div class="service-card" onclick="showServiceModal('Scheduled Maintenance', 'Service booked!')"><i class="fas fa-wrench"></i><h3>Scheduled Maintenance</h3><p>Factory-recommended care for peak condition.</p><button>Schedule Service</button></div>
+        <div class="service-card" onclick="showServiceModal('Repairs & Diagnostics', 'Repair request sent!')"><i class="fas fa-tools"></i><h3>Repairs & Diagnostics</h3><p>Expert work, genuine Ford parts.</p><button>Request Repair</button></div>
+        <div class="service-card" onclick="showServiceModal('Electric Vehicle Services', 'Info submitted!')"><i class="fas fa-bolt"></i><h3>EV Services</h3><p>Charging and maintenance for EVs.</p><button>Learn More</button></div>
+        <div class="service-card" onclick="showServiceModal('Extended Service Plans', 'Thank you for viewing!')"><i class="fas fa-shield-alt"></i><h3>Extended Plans</h3><p>Packages for extra peace of mind.</p><button>View Plans</button></div>
+      </div>
+    </section>
+    <!-- Support Section -->
+    <section id="supportSection" style="display:none;">
+      <div class="section-title"><h2>Support</h2><p>Resources and help for your Ford</p></div>
+      <div class="supports">
+        <div class="support-card" onclick="showSupportModal('Owner Manuals', 'Manuals are available online.')"><i class="fas fa-book"></i><h3>Owner Manuals</h3><p>Digital guides for every model.</p><button>View Manuals</button></div>
+        <div class="support-card" onclick="showSupportModal('Recalls & Campaigns', 'No active recalls!')"><i class="fas fa-exclamation-triangle"></i><h3>Recalls & Service</h3><p>Keep your car safe and updated.</p><button>Check Recalls</button></div>
+        <div class="support-card" onclick="showSupportModal('FAQs & Guides', 'View our online help library.')"><i class="fas fa-question-circle"></i><h3>FAQs & How-To</h3><p>Get answers and see feature guides.</p><button>Browse Guides</button></div>
+        <div class="support-card" onclick="showSupportModal('Roadside Assistance', 'Call 1-800-392-3673!')"><i class="fas fa-headset"></i><h3>Roadside Assistance</h3><p>24/7 help with emergencies</p><button>Get Help</button></div>
+      </div>
+    </section>
+    <!-- Single Contact Section -->
+    <section id="contactSection" style="display:none;">
+      <div class="section-title"><h2>Contact Us</h2><p>We're here for help and feedback</p></div>
+      <div style="display:flex;gap:40px;flex-wrap:wrap;justify-content:center;">
+        <div style="max-width:360px;">
+          <h3>Customer Care</h3>
+          <p><strong>Phone:</strong> 1-800-392-3673</p>
+          <p><strong>Email:</strong> support@ford.com</p>
+          <p><strong>Address:</strong> Ford Motor Company, Dearborn, MI 48126</p>
+        </div>
+        <div style="max-width:430px;flex-grow:1;">
+          <h3>Send a Message</h3>
+          <form id="contactForm">
+            <input id="name" type="text" placeholder="Your name" required />
+            <input id="contactEmail" type="email" placeholder="Your email" required />
+            <input id="subject" type="text" placeholder="Subject" required />
+            <textarea id="message" rows="5" placeholder="Message" required></textarea>
+            <button type="submit">Send Message</button>
+          </form>
+        </div>
+      </div>
+    </section>
+  </div>
+  <footer style="background:#002a55; color:#bbb; padding:40px 20px; text-align:center;font-size:16px;">
+    <div class="container">&copy; 2023 Ford Motor Company. All rights reserved.</div>
+  </footer>
+  <div id="notification"></div>
+  <script>
+    function showNotification(msg) {
+      const n = document.getElementById('notification');
+      n.textContent = msg;
+      n.className = 'show';
+      setTimeout(() => { n.className = ''; }, 2800);
+    }
+    if(!sessionStorage.getItem('registeredEmails')) {
+      sessionStorage.setItem('registeredEmails', JSON.stringify([]));
+    }
+    function getRegisteredEmails() {
+      return JSON.parse(sessionStorage.getItem('registeredEmails') || '[]');
+    }
+    function setRegisteredEmails(emails){
+      sessionStorage.setItem('registeredEmails', JSON.stringify(emails));
+    }
+    function isLoggedIn() {
+      return sessionStorage.getItem('loggedIn') === 'true';
+    }
+    function setLogin(email){
+      sessionStorage.setItem('loggedIn', 'true');
+      sessionStorage.setItem('userEmail', email);
+    }
+    function clearLogin(){
+      sessionStorage.removeItem('loggedIn');
+      sessionStorage.removeItem('userEmail');
+    }
+    const loginForm = document.getElementById('loginForm');
+    const createForm = document.getElementById('createAccountForm');
+    const loginSection = document.getElementById('loginSection');
+    const dashboard = document.getElementById('dashboard');
+    const userNameSpan = document.getElementById('userName');
+    const logoutBtn = document.getElementById('logoutBtn');
+    const toggleToCreate = document.getElementById('toggleForm');
+    const toggleToLogin = document.getElementById('backToLogin');
+    const formTitle = document.getElementById('formTitle');
+    const formSubtitle = document.getElementById('formSubtitle');
+    const navLinks = document.querySelectorAll('nav a');
+    const sections = {
+      home: document.getElementById('homeSection'),
+      vehicles: document.getElementById('vehiclesSection'),
+      services: document.getElementById('servicesSection'),
+      support: document.getElementById('supportSection'),
+      contact: document.getElementById('contactSection')
+    };
+    function updateUI() {
+      if(isLoggedIn()) {
+        const email = sessionStorage.getItem('userEmail');
+        userNameSpan.textContent = email;
+        dashboard.style.display = 'block';
+        loginSection.style.display = 'none';
+      } else {
+        dashboard.style.display = 'none';
+        loginSection.style.display = 'block';
+        showSection('home');
+        createForm.style.display = 'none';
+        loginForm.style.display = 'block';
+        formTitle.querySelector('h2').textContent = 'Customer Login';
+        formSubtitle.textContent = 'Access your personalized Ford account';
+      }
+    }
+    updateUI();
+    function showSection(name) {
+      Object.values(sections).forEach(s => s.style.display = 'none');
+      if(name && sections[name]) sections[name].style.display = 'block';
+      else sections.home.style.display = 'block';
+      navLinks.forEach(link => link.classList.toggle('active', link.dataset.section === name));
+    }
+    navLinks.forEach(link => {
+      link.addEventListener('click', e => {
+        e.preventDefault();
+        const target = link.dataset.section;
+        if(target !== 'home' && !isLoggedIn()) {
+          showNotification('Please login to access this section.');
+          return;
+        }
+        showSection(target);
+      });
+    });
+    toggleToCreate.addEventListener('click', e => {
+      e.preventDefault();
+      loginForm.style.display = 'none';
+      createForm.style.display = 'block';
+      formTitle.querySelector('h2').textContent = 'Create Account';
+      formSubtitle.textContent = 'Start your journey with Ford';
+    });
+    toggleToLogin.addEventListener('click', e => {
+      e.preventDefault();
+      createForm.style.display = 'none';
+      loginForm.style.display = 'block';
+      formTitle.querySelector('h2').textContent = 'Customer Login';
+      formSubtitle.textContent = 'Access your personalized Ford account';
+    });
+    loginForm.addEventListener('submit', e => {
+      e.preventDefault();
+      const email = loginForm.email.value.trim().toLowerCase();
+      const password = loginForm.password.value.trim();
+      if (!email || !password) {
+        showNotification('Please fill in both email and password.');
+        return;
+      }
+      if(password.length < 6){
+        showNotification('Password must be at least 6 characters.');
+        return;
+      }
+      const regEmails = getRegisteredEmails();
+      if(!regEmails.includes(email)){
+        showNotification('Email not registered. Please create an account.');
+        return;
+      }
+      setLogin(email);
+      userNameSpan.textContent = email;
+      loginSection.style.display = 'none';
+      dashboard.style.display = 'block';
+      showSection('home');
+      showNotification('Login successful!');
+    });
+    logoutBtn.addEventListener('click', () => {
+      clearLogin();
+      dashboard.style.display = 'none';
+      loginSection.style.display = 'block';
+      loginForm.reset();
+      showSection('home');
+      showNotification('Logged out!');
+    });
+    createForm.addEventListener('submit', e => {
+      e.preventDefault();
+      const name = createForm['createName'].value.trim();
+      const email = createForm['createEmail'].value.trim().toLowerCase();
+      const password = createForm['createPassword'].value;
+      const confirmPassword = createForm['confirmPassword'].value;
+      if(password !== confirmPassword){
+        showNotification('Passwords do not match.');
+        return;
+      }
+      if(password.length < 6){
+        showNotification('Password must be at least 6 characters.');
+        return;
+      }
+      if(!name){
+        showNotification('Please enter your full name.');
+        return;
+      }
+      let regEmails = getRegisteredEmails();
+      if(regEmails.includes(email)){
+        showNotification('This email is already registered.');
+        return;
+      }
+      regEmails.push(email);
+      setRegisteredEmails(regEmails);
+      showNotification(`Account created for ${name}! Please log in.`);
+      createForm.reset();
+      toggleToLogin.click();
+    });
+    const facilityCards = document.querySelectorAll('.interactive-card');
+    const infoPanels = {
+      vehicle: document.getElementById('vehiclePanel'),
+      service: document.getElementById('servicePanel'),
+      warranty: document.getElementById('warrantyPanel'),
+      roadside: document.getElementById('roadsidePanel'),
+      remote: document.getElementById('remotePanel'),
+      rewards: document.getElementById('rewardsPanel')
+    };
+    facilityCards.forEach(card => {
+      card.addEventListener('click', () => {
+        Object.values(infoPanels).forEach(panel => panel.style.display = 'none');
+        const type = card.dataset.type;
+        if(infoPanels[type]) infoPanels[type].style.display = 'block';
+      });
+    });
+    const customModal = document.getElementById('customModal');
+    const closeModal = document.getElementById('closeModal');
+    const customForm = document.getElementById('customForm');
+    const modalTitle = document.getElementById('modalTitle');
+    let currentVehicle = '';
+    document.querySelectorAll('.customize-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        currentVehicle = btn.closest('.model-card').dataset.name;
+        modalTitle.textContent = `Customize ${currentVehicle}`;
+        customForm.reset();
+        customModal.classList.add('active');
+      });
+    });
+    closeModal.addEventListener('click', () => customModal.classList.remove('active'));
+    window.addEventListener('click', e => {
+      if(e.target === customModal) customModal.classList.remove('active');
+    });
+    customForm.addEventListener('submit', e => {
+      e.preventDefault();
+      const color = document.getElementById('color').value;
+      const wheels = document.getElementById('wheels').value;
+      const acc = document.getElementById('accessories').value.trim();
+      if(!color || !wheels){ showNotification('Select color and wheels!'); return; }
+      showNotification(`Order for ${currentVehicle}: ${color}, ${wheels}` + (acc ? `, ${acc}` : ''));
+      customModal.classList.remove('active');
+    });
+    function showServiceModal(title, message){
+      showNotification(`${title}: ${message}`);
+    }
+    function showSupportModal(title, message){
+      showNotification(`${title}: ${message}`);
+    }
+    const contactForm = document.getElementById('contactForm');
+    if(contactForm){
+      contactForm.addEventListener('submit', e => {
+        e.preventDefault();
+        const name = document.getElementById('name').value.trim();
+        const email = document.getElementById('contactEmail').value.trim();
+        const subject = document.getElementById('subject').value.trim();
+        const message = document.getElementById('message').value.trim();
+        if(!name || !email || !subject || !message){
+          showNotification('Please fill every field!');
+          return;
+        }
+        contactForm.reset();
+        showNotification('Message sent!');
+      });
+    }
+  </script>
+</body>
+</html>
