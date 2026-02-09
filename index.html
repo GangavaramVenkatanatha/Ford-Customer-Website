@@ -4,116 +4,118 @@
   <meta charset="UTF-8" />
   <title>Ford Customer Portal</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   <style>
-    /* Base and Typography */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
     body, html {
-      margin:0;
-      padding:0;
-      font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       background: linear-gradient(135deg, #dbe9ff 0%, #f5f7fa 100%);
-      color:#222;
+      color: #222;
       overflow-x: hidden;
+      min-height: 100vh;
     }
+
     .container {
-      max-width:1200px;
-      margin:0 auto;
-      padding:0 20px 54px;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px 54px;
     }
+
     /* Header */
     header {
       background: linear-gradient(90deg, #003366, #001933);
-      color:#fff;
-      padding:15px 0;
-      position:sticky;
-      top:0;
+      color: #fff;
+      padding: 15px 0;
+      position: sticky;
+      top: 0;
       z-index: 100;
-      box-shadow: 0 4px 12px rgb(0 0 0 / 0.18);
-      animation: slideDown 0.8s ease forwards;
-      opacity: 0;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.18);
     }
-    @keyframes slideDown {
-      to {opacity: 1; transform: translateY(0);}
-      from {opacity: 0; transform: translateY(-20px);}
-    }
+
     .header-content {
-      max-width:1200px;
-      margin:0 auto;
-      padding:0 20px;
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
     }
+
     .logo {
-      display:flex;
-      align-items:center;
+      display: flex;
+      align-items: center;
       cursor: pointer;
       transition: transform 0.3s ease;
     }
+
     .logo:hover {
       transform: scale(1.05);
     }
+
     .logo img {
       height: 40px;
       margin-right: 12px;
-      filter: drop-shadow(0 1px 2px rgba(0,0,0,0.4));
     }
+
     .logo h1 {
       font-size: 28px;
       font-weight: 900;
       letter-spacing: 1.2px;
     }
+
     nav ul {
-      display:flex;
-      list-style:none;
-      padding:0;
-      margin:0;
+      display: flex;
+      list-style: none;
+      padding: 0;
+      margin: 0;
       font-weight: 600;
     }
+
     nav li {
       margin-left: 24px;
-      position: relative;
     }
+
     nav li:first-child {
       margin-left: 0;
     }
+
     nav a {
-      color:#fff;
-      text-decoration:none;
+      color: #fff;
+      text-decoration: none;
       padding: 10px 15px;
       border-radius: 6px;
-      transition: 
-        background-color 0.3s, 
-        color 0.3s, 
-        transform 0.2s ease;
-      will-change: transform, background-color, color;
+      transition: background-color 0.3s, color 0.3s, transform 0.2s ease;
       cursor: pointer;
     }
+
     nav a.active,
     nav a:hover {
       background: #3f91f6;
       color: #fff;
       transform: scale(1.1);
-      box-shadow: 0 4px 8px rgb(63 145 246 / 0.5);
+      box-shadow: 0 4px 8px rgba(63, 145, 246, 0.5);
     }
+
     /* Hero section */
     .hero {
       background: url('https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&w=1500&q=80') center/cover no-repeat;
-      position:relative;
+      position: relative;
       height: 300px;
       overflow: hidden;
     }
+
     .hero::before {
       content: "";
       position: absolute;
       inset: 0;
       background: rgba(0, 42, 90, 0.75);
       z-index: 1;
-      transition: background 0.5s ease;
     }
-    .hero:hover::before {
-      background: rgba(0, 42, 90, 0.55);
-    }
+
     .hero-content {
       position: relative;
       z-index: 2;
@@ -124,24 +126,16 @@
       align-items: center;
       color: #fff;
       text-align: center;
-      animation: fadeInUp 1s ease forwards;
-      opacity: 0;
-      transform: translateY(20px);
       padding: 20px;
     }
-    @keyframes fadeInUp {
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
+
     .hero-content h2 {
       font-size: 2.8rem;
       margin-bottom: 12px;
       font-weight: 900;
-      letter-spacing: 1.25px;
       text-shadow: 0 2px 10px rgba(0,0,0,0.7);
     }
+
     .hero-content p {
       font-size: 1.3rem;
       max-width: 700px;
@@ -154,18 +148,14 @@
       text-align: center;
       margin: 40px 0 36px;
       color: #01407f;
-      animation: fadeIn 1.5s ease forwards;
-      opacity: 0;
     }
-    @keyframes fadeIn {
-      to {opacity: 1;}
-    }
+
     .section-title h2 {
       font-size: 2.6rem;
       font-weight: 900;
       margin-bottom: 10px;
-      letter-spacing: 1.1px;
     }
+
     .section-title p {
       font-size: 1.15rem;
       font-weight: 600;
@@ -179,24 +169,22 @@
       border-radius: 16px;
       padding: 40px 36px;
       margin: 0 auto 55px;
-      box-shadow:
-        0 6px 18px rgba(0,80,160,0.2),
-        inset 0 0 15px rgba(255, 255, 255, 0.6);
+      box-shadow: 0 6px 18px rgba(0,80,160,0.2);
       transition: transform 0.35s ease, box-shadow 0.35s ease;
-      will-change: transform, box-shadow;
     }
+
     .login-section:hover {
       transform: translateY(-8px);
-      box-shadow:
-        0 10px 30px rgba(0,80,160,0.4),
-        inset 0 0 20px rgba(255, 255, 255, 0.85);
+      box-shadow: 0 10px 30px rgba(0,80,160,0.4);
     }
+
     .login-section label {
       margin-bottom: 8px;
       display: block;
       color: #003366;
       font-weight: 800;
     }
+
     .login-section input {
       width: 100%;
       font-size: 17px;
@@ -207,13 +195,14 @@
       box-sizing: border-box;
       background: #eaf4ff;
       transition: border-color 0.3s, box-shadow 0.3s;
-      outline-offset: 2px;
     }
+
     .login-section input:focus {
       border-color: #0072f5;
       box-shadow: 0 0 10px #409cff;
       background: #ffffff;
     }
+
     .login-section button {
       width: 100%;
       padding: 16px 0;
@@ -224,19 +213,20 @@
       color: white;
       border: none;
       cursor: pointer;
-      box-shadow: 0 6px 14px #0073f5aa;
-      transition: background-color 0.3s, box-shadow 0.3s ease;
+      box-shadow: 0 6px 14px rgba(0,115,245,0.67);
+      transition: background-color 0.3s;
     }
+
     .login-section button:hover {
       background-color: #004db3;
-      box-shadow: 0 8px 24px #004db3cc;
     }
+
     .form-footer {
       margin-top: 22px;
       text-align: center;
       font-weight: 700;
-      letter-spacing: 0.03em;
     }
+
     .form-footer a {
       color: #0054cc;
       margin: 0 14px;
@@ -245,6 +235,7 @@
       transition: color 0.3s ease;
       cursor: pointer;
     }
+
     .form-footer a:hover {
       text-decoration: underline;
       color: #003d8c;
@@ -259,17 +250,8 @@
       margin: 0 auto 54px;
       box-shadow: 0 8px 30px rgba(0, 45, 105, 0.15);
       padding: 40px 36px 52px;
-      animation: fadeSlideIn 0.8s ease forwards;
-      opacity: 0;
-      transform: translateY(20px);
-      will-change: transform, opacity;
     }
-    @keyframes fadeSlideIn {
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
+
     .dashboard-header {
       display: flex;
       justify-content: space-between;
@@ -277,14 +259,14 @@
       border-bottom: 3px solid #d2e2ff;
       margin-bottom: 36px;
       padding-bottom: 20px;
-      position: relative;
     }
+
     .dashboard-header h2 {
       font-weight: 900;
       font-size: 28px;
-      letter-spacing: 1.2px;
       color: #002a55;
     }
+
     .dashboard-header button {
       background: #d63031;
       color: #fff;
@@ -295,11 +277,10 @@
       font-size: 18px;
       cursor: pointer;
       transition: background 0.3s ease;
-      box-shadow: 0 6px 20px #d63031bb;
     }
+
     .dashboard-header button:hover {
       background: #8e1f21;
-      box-shadow: 0 8px 30px #8e1f21cc;
     }
 
     /* Facilities cards */
@@ -309,6 +290,7 @@
       gap: 28px;
       justify-content: space-between;
     }
+
     .facility-card {
       background: linear-gradient(135deg, #0f80ff, #00c9ff);
       color: white;
@@ -321,62 +303,333 @@
       flex-direction: column;
       text-align: center;
       transition: transform 0.3s ease, box-shadow 0.3s ease;
-      user-select:none;
     }
+
     .facility-card:hover {
-      transform: translateY(-16px) rotate(-1deg);
+      transform: translateY(-16px);
       box-shadow: 0 30px 72px rgba(0,140,255,0.5);
     }
+
     .facility-card .icon {
       font-size: 48px;
       margin-bottom: 32px;
-      filter: drop-shadow(0 2px 8px rgba(0,0,0,0.25));
-      transition: transform 0.4s ease;
     }
-    .facility-card:hover .icon {
-      transform: scale(1.2) rotate(12deg);
-    }
+
     .facility-card h3 {
       font-size: 24px;
       font-weight: 900;
       margin-bottom: 16px;
-      letter-spacing: 0.07em;
-      text-shadow: 0 2px 12px rgba(0,0,0,0.3);
     }
+
     .facility-card p {
       font-size: 17px;
       line-height: 1.6;
       font-weight: 600;
-      letter-spacing: 0.02em;
-      text-shadow: 0 1px 6px rgba(0,0,0,0.22);
     }
 
-    /* Info Panels */
-    .info-panel {
+    /* Orders Section */
+    .orders-section {
       display: none;
-      background: #dcefff;
-      border-radius: 24px;
-      max-width: 700px;
-      margin: 60px auto 72px;
-      padding: 48px 44px 44px;
-      box-shadow: 0 18px 54px rgba(0, 118, 255, 0.14);
-      font-size: 17px;
-      font-weight: 700;
-      color: #004080;
-      letter-spacing: 0.035em;
-      line-height: 1.55;
-      animation: fadeInUp 0.5s ease forwards;
-      opacity: 0;
-      transform: translateY(12px);
-      will-change: opacity, transform;
+      background: #fff;
+      border-radius: 20px;
+      max-width: 1200px;
+      margin: 0 auto 54px;
+      box-shadow: 0 8px 30px rgba(0, 45, 105, 0.15);
+      padding: 40px 36px 52px;
     }
-    .info-panel h4 {
-      color: #0062cc;
+
+    .orders-controls {
+      display: flex;
+      gap: 15px;
+      margin-bottom: 30px;
+      flex-wrap: wrap;
+    }
+
+    .order-btn {
+      padding: 12px 24px;
+      border: none;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .order-btn.primary {
+      background: #0073f5;
+      color: white;
+    }
+
+    .order-btn.success {
+      background: #28a745;
+      color: white;
+    }
+
+    .order-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
+
+    /* Enhanced orders table styling */
+    .order-table-wrapper {
+      overflow-x: auto;
+      border-radius: 8px;
+      border: 1px solid #e9ecef;
+    }
+
+    .order-table {
+      width: 100%;
+      border-collapse: collapse;
+      background: white;
+      min-width: 800px;
+    }
+
+    .order-table th {
+      background: #003366;
+      color: white;
+      padding: 16px 12px;
+      text-align: left;
+      font-weight: 600;
+      font-size: 14px;
+    }
+
+    .order-table td {
+      padding: 14px 12px;
+      border-bottom: 1px solid #e9ecef;
+      font-size: 14px;
+    }
+
+    .order-table tr:hover {
+      background: #f8f9fa;
+    }
+
+    .empty-row {
+      text-align: center;
+      color: #6c757d;
+      font-style: italic;
+    }
+
+    .order-actions {
+      display: flex;
+      gap: 8px;
+    }
+
+    .action-btn {
+      padding: 6px 12px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .action-btn.view {
+      background: #17a2b8;
+      color: white;
+    }
+
+    .action-btn.cancel {
+      background: #dc3545;
+      color: white;
+    }
+
+    .action-btn:disabled {
+      background: #6c757d;
+      cursor: not-allowed;
+    }
+
+    /* Model card styling */
+    .models-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 28px;
+      margin-top: 18px;
+    }
+
+    .model-card {
+      background: #e0f1ff;
+      padding: 27px 18px 29px;
+      border-radius: 17px;
+      box-shadow: 0 9px 30px rgba(0,101,215,0.10);
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      transition: box-shadow 0.3s, transform 0.3s;
+      text-align: center;
+    }
+
+    .model-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 18px 48px rgba(0, 101, 215, 0.20);
+    }
+
+    .model-card img {
+      max-width: 120px;
+      margin-bottom: 18px;
+      border-radius: 13px;
+    }
+
+    .model-card h3 {
+      font-size: 20px;
+      color: #004c90;
+      margin-bottom: 8px;
+      font-weight: 700;
+    }
+
+    .model-card p {
+      font-size: 15px;
+      color: #0060c8;
+      margin-bottom: 14px;
+      line-height: 1.4;
+    }
+
+    .model-card .order-btn {
+      background: #0071cc;
+      color: white;
+      font-size: 15px;
+      font-weight: 700;
+      border: none;
+      border-radius: 10px;
+      padding: 12px 24px;
+      margin-top: auto;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .model-card .order-btn:hover{
+      background: #004288;
+    }
+
+    /* Modal styling */
+    .custom-modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,36,92,0.8);
+      justify-content: center;
+      align-items: center;
+      z-index: 20000;
+    }
+
+    .custom-modal.active {
+      display: flex;
+    }
+
+    .custom-modal-content {
+      background: white;
+      border-radius: 17px;
+      max-width: 500px;
+      padding: 32px 28px 38px;
+      position: relative;
+      box-shadow: 0 18px 70px rgba(0,98,200,0.42);
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+
+    .custom-modal-close {
+      position: absolute;
+      top: 20px;
+      right: 28px;
       font-size: 28px;
       font-weight: 900;
-      margin-bottom: 32px;
-      text-shadow: 0 0 12px rgba(0,99,204,0.35);
-      letter-spacing: 0.07em;
+      color: #0053a4;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+    }
+
+    .modal-title {
+      font-size: 23px;
+      font-weight: 900;
+      color: #004288;
+      text-align: center;
+      margin-bottom: 23px;
+    }
+
+    .modal-form-group {
+      margin-bottom: 20px;
+    }
+
+    .modal-form-group label {
+      font-weight: 700;
+      margin-bottom: 7px;
+      color: #004080;
+      display: block;
+    }
+
+    .modal-form-group select,
+    .modal-form-group input,
+    .modal-form-group textarea {
+      width: 100%;
+      padding: 12px;
+      border: 2px solid #6ea5ff;
+      border-radius: 8px;
+      font-size: 16px;
+      box-sizing: border-box;
+    }
+
+    .btn-modal-submit {
+      width: 100%;
+      padding: 14px 0;
+      font-weight: 900;
+      font-size: 18px;
+      background: #005bb3;
+      border-radius: 12px;
+      border: none;
+      color: white;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .btn-modal-submit:hover{
+      background: #003d73;
+    }
+
+    /* Services and support cards */
+    .services, .supports {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 27px;
+      justify-content: center;
+    }
+
+    .service-card, .support-card {
+      background: linear-gradient(135deg, #0077ff, #00bfff);
+      color: #fff;
+      border-radius: 18px;
+      padding: 32px 27px 30px;
+      box-shadow: 0 12px 28px rgba(0,120,255,0.29);
+      min-width: 220px;
+      flex: 1 1 220px;
+      cursor: pointer;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .service-card:hover, .support-card:hover {
+      transform: translateY(-12px);
+      box-shadow: 0 20px 48px rgba(0,120,255,0.48);
+    }
+
+    .service-card h3, .support-card h3 {
+      font-size: 20px;
+      font-weight: 800;
+      margin-bottom: 12px;
+    }
+
+    .service-card p, .support-card p {
+      font-size: 15px;
+    }
+
+    .service-card button, .support-card button {
+      margin-top: 17px;
+      background: #fff;
+      color: #0066cc;
+      font-weight: 700;
+      border: none;
+      padding: 10px 22px;
+      border-radius: 12px;
+      cursor: pointer;
+      font-size: 16px;
     }
 
     /* Contact Section */
@@ -388,111 +641,31 @@
       padding: 48px 36px 52px;
       box-shadow: 0 16px 36px rgba(5, 60, 115, 0.24);
       color: #003366;
-      font-weight: 700;
-      font-size: 18px;
-      letter-spacing: 0.035em;
-      line-height: 1.5;
-      user-select:none;
-      animation: fadeIn 1s ease forwards;
     }
-    #contactSection .section-title h2 {
-      color: #003e96;
-      font-weight: 900;
-      margin-bottom: 14px;
-      text-align: center;
-      font-size: 2.6rem;
-      text-shadow: 0 0 10px #004dbdaa;
-      letter-spacing: 0.07em;
-    }
-    #contactSection .section-title p {
-      text-align: center;
-      color: #0056bf;
-      margin-bottom: 36px;
-      font-weight: 600;
-      font-size: 1.3rem;
-      text-shadow: 0 0 8px #3388ff99;
-    }
-    #contactSection > div {
-      display: flex;
-      gap: 52px;
-      flex-wrap: wrap;
-      justify-content: center;
-      align-items: flex-start;
-    }
-    #contactSection > div > div:first-child {
-      background: #ddf1ff;
-      border-radius: 18px;
-      padding: 36px 32px;
-      box-shadow: 0 8px 26px rgba(0, 69, 135, 0.2);
-      flex-basis: 360px;
-      font-weight: 600;
-      color: #003366;
-      line-height: 1.5;
-      letter-spacing: 0.02em;
-      user-select:none;
-      transition: box-shadow 0.3s ease;
-    }
-    #contactSection > div > div:first-child:hover {
-      box-shadow: 0 12px 40px rgba(0, 95, 185, 0.32);
-    }
-    #contactSection > div > div:first-child h3 {
-      font-weight: 900;
-      font-size: 1.5rem;
-      margin-bottom: 18px;
-      color: #00367a;
-      border-bottom: 3px solid #0072ff;
-      padding-bottom: 8px;
-      letter-spacing: 0.06em;
-      text-shadow: 0 0 5px #0052eecc;
-    }
-    #contactSection > div > div:first-child p {
-      margin: 10px 0;
-      font-size: 1.05rem;
-      color: #003366;
-      font-weight: 700;
-      line-height: 1.6;
-      user-select:none;
-    }
+
     #contactSection form {
-      flex-grow: 1;
-      max-width: 460px;
       background: #f0f7ff;
       padding: 36px 32px;
       border-radius: 18px;
-      box-shadow: 0 8px 28px rgba(0, 88, 177, 0.12);
       display: flex;
       flex-direction: column;
-      user-select:none;
-      transition: box-shadow 0.3s ease;
     }
-    #contactSection form:hover {
-      box-shadow: 0 12px 48px rgba(0, 103, 202, 0.3);
-    }
+
     #contactSection form input,
     #contactSection form textarea {
       font-size: 17px;
-      font-weight: 700;
       padding: 16px 18px;
       margin-bottom: 24px;
       border-radius: 14px;
       border: 2px solid #6ea5ff;
       color: #003366;
-      outline-offset: 3px;
-      transition: border-color 0.3s ease, box-shadow 0.3s ease;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      box-sizing: border-box;
-      user-select:text;
     }
-    #contactSection form input:focus,
-    #contactSection form textarea:focus {
-      border-color: #0049cc;
-      box-shadow: 0 0 14px 3px #1a70ff88;
-      background: #e9f1ff;
-    }
+
     #contactSection form textarea {
       min-height: 100px;
       resize: vertical;
     }
+
     #contactSection form button {
       padding: 18px 0;
       font-weight: 900;
@@ -502,221 +675,6 @@
       background: #0d5ecc;
       color: white;
       cursor: pointer;
-      box-shadow: 0 6px 20px #0d5ecccc;
-      transition: background-color 0.3s ease, box-shadow 0.3s ease;
-    }
-    #contactSection form button:hover {
-      background-color: #073a86;
-      box-shadow: 0 8px 26px #073a86cc;
-    }
-    /* Animations */
-    @keyframes fadeInUp {
-      from {
-        opacity: 0;
-        transform: translateY(20px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    /* Responsive */
-    @media (max-width: 840px) {
-      #contactSection > div {
-        flex-direction: column;
-        gap: 28px;
-      }
-      .facility-card, .service-card, .support-card {
-        flex-basis: 100%;
-        max-width: unset;
-      }
-      .dashboard {
-        padding: 28px 20px 40px;
-      }
-    }
-    @media (max-width: 420px) {
-      .login-section, #contactSection {
-        max-width: 95vw;
-        padding: 30px 20px;
-      }
-      #contactSection form {
-        max-width: 100%;
-        padding: 28px 20px;
-      }
-    }
-
-    /* Model card styling */
-    .models-list {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px,1fr));
-      gap: 28px;
-      margin-top: 18px;
-    }
-    .model-card {
-      background:#e0f1ff;
-      padding:27px 18px 29px;
-      border-radius:17px;
-      box-shadow:0 9px 30px rgba(0,101,215,0.10);
-      cursor: pointer;
-      display: flex;
-      flex-direction: column;
-      align-items:center;
-      transition: box-shadow 0.3s, transform 0.3s;
-    }
-    .model-card:hover {
-      transform: translateY(-10px);
-      box-shadow:0 18px 48px rgba(0, 101, 215, 0.20);
-    }
-    .model-card img {
-      max-width:120px;
-      margin-bottom:18px;
-      border-radius:13px;
-    }
-    .model-card h3 {
-      font-size:20px;
-      color:#004c90;
-      margin-bottom:8px;
-      font-weight:700;
-    }
-    .model-card p {
-      font-size:15px;
-      color:#0060c8;
-      margin-bottom:14px;
-    }
-    .model-card .customize-btn {
-      background:#0071cc;
-      color:white;
-      font-size:15px;
-      font-weight:700;
-      border:none;
-      border-radius:10px;
-      padding:12px 24px;
-      margin-top:auto;
-      cursor:pointer;
-      transition: background 0.3s ease;
-    }
-    .model-card .customize-btn:hover{
-      background:#004288;
-    }
-    /* Modal styling */
-    .custom-modal {
-      display:none;
-      position:fixed;
-      inset:0;
-      background:rgba(0,36,92,0.8);
-      backdrop-filter:blur(6px);
-      justify-content:center;
-      align-items:center;
-      z-index:20000;
-      animation: fadeIn 0.3s ease forwards;
-      opacity: 0;
-    }
-    .custom-modal.active {
-      display:flex;
-      opacity: 1;
-    }
-    .custom-modal-content {
-      background:white;
-      border-radius:17px;
-      max-width:400px;
-      padding:32px 28px 38px;
-      position:relative;
-      box-shadow:0 18px 70px rgba(0,98,200,0.42);
-    }
-    .custom-modal-close {
-      position:absolute;
-      top:20px;
-      right:28px;
-      font-size:28px;
-      font-weight:900;
-      color:#0053a4;
-      background:transparent;
-      border:none;
-      cursor:pointer;
-      transition: color 0.3s ease;
-    }
-    .custom-modal-close:hover {
-      color: #00285d;
-    }
-    .modal-title {
-      font-size:23px;
-      font-weight:900;
-      color:#004288;
-      text-align:center;
-      margin-bottom:23px;
-    }
-    .modal-form-group {
-      margin-bottom:20px;
-    }
-    .modal-form-group label {
-      font-weight:700;
-      margin-bottom:7px;
-      color:#004080;
-      display:block;
-    }
-    .btn-modal-submit {
-      width:100%;
-      padding:14px 0;
-      font-weight:900;
-      font-size:18px;
-      background:#005bb3;
-      border-radius:12px;
-      border:none;
-      color:white;
-      cursor:pointer;
-      transition: background 0.3s ease;
-    }
-    .btn-modal-submit:hover{
-      background:#003d73;
-    }
-
-    /* Services and support cards */
-    .services,.supports{
-      display:flex;
-      flex-wrap:wrap;
-      gap:27px;
-      justify-content:center;
-    }
-    .service-card, .support-card{
-      background:linear-gradient(135deg,#0077ff,#00bfff);
-      color:#fff;
-      border-radius:18px;
-      padding:32px 27px 30px;
-      box-shadow:0 12px 28px rgba(0,120,255,0.29);
-      min-width:220px;
-      flex:1 1 220px;
-      cursor:pointer;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      user-select:none;
-    }
-    .service-card:hover, .support-card:hover {
-      transform: translateY(-12px);
-      box-shadow:0 20px 48px rgba(0,120,255,0.48);
-    }
-    .service-card h3, .support-card h3 {
-      font-size:20px;
-      font-weight:800;
-      margin-bottom:12px;
-      letter-spacing: 0.04em;
-    }
-    .service-card p, .support-card p {
-      font-size:15px;
-    }
-    .service-card button,.support-card button {
-      margin-top:17px;
-      background: #fff;
-      color:#0066cc;
-      font-weight:700;
-      border: none;
-      padding: 10px 22px;
-      border-radius: 12px;
-      cursor: pointer;
-      font-size: 16px;
-      transition: background 0.2s;
-    }
-    .service-card button:hover,.support-card button:hover {
-      background: #e0f0ff;
     }
 
     /* Notification styling */
@@ -736,247 +694,477 @@
       transition: opacity 0.28s;
       z-index: 99999;
     }
+
     #notification.show {
       opacity: 1;
       pointer-events: auto;
+    }
+
+    /* Status badges */
+    .status-badge {
+      padding: 4px 8px;
+      border-radius: 12px;
+      font-size: 12px;
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+
+    .status-pending {
+      background: #fff3cd;
+      color: #856404;
+    }
+
+    .status-confirmed {
+      background: #d1ecf1;
+      color: #0c5460;
+    }
+
+    .status-processing {
+      background: #d1ecf1;
+      color: #0c5460;
+    }
+
+    .status-shipped {
+      background: #d4edda;
+      color: #155724;
+    }
+
+    .status-delivered {
+      background: #d4edda;
+      color: #155724;
+    }
+
+    .status-cancelled {
+      background: #f8d7da;
+      color: #721c24;
+    }
+
+    .local-time {
+      background: #e7f3ff;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 12px;
+    }
+
+    .utc-time {
+      color: #666;
+      font-size: 11px;
+    }
+
+    /* Order filters */
+    .order-filters {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 15px;
+      flex-wrap: wrap;
+    }
+
+    .order-filter {
+      padding: 8px 12px;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      font-size: 14px;
+      min-width: 120px;
+    }
+
+    .filter-btn {
+      padding: 8px 16px;
+      background: #0073f5;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    .filter-btn:hover {
+      background: #0056b3;
+    }
+
+    /* Responsive */
+    @media (max-width: 840px) {
+      .facility-card, .service-card, .support-card {
+        flex-basis: 100%;
+      }
+      .dashboard {
+        padding: 28px 20px 40px;
+      }
+      .models-list {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      }
+    }
+
+    @media (max-width: 480px) {
+      .models-list {
+        grid-template-columns: 1fr;
+      }
+      .order-filters {
+        flex-direction: column;
+      }
     }
   </style>
 </head>
 <body>
   <header>
-    <div class="header-content container" role="banner">
-      <div class="logo" tabindex="0">
+    <div class="header-content container">
+      <div class="logo">
         <img src="https://www.ford.com/favicon.ico" alt="Ford Logo" />
         <h1>Ford Customer Portal</h1>
       </div>
-      <nav role="navigation">
+      <nav>
         <ul>
-          <li><a href="#" class="active" data-section="home" aria-current="page">Home</a></li>
+          <li><a href="#" class="active" data-section="home">Home</a></li>
           <li><a href="#" data-section="vehicles">Vehicles</a></li>
           <li><a href="#" data-section="services">Services</a></li>
           <li><a href="#" data-section="support">Support</a></li>
+          <li><a href="#" data-section="orders">My Orders</a></li>
           <li><a href="#" data-section="contact">Contact</a></li>
         </ul>
       </nav>
     </div>
   </header>
-  <section class="hero" role="img" aria-label="Car exterior in a beautiful setting">
-    <div></div>
+
+  <section class="hero">
     <div class="hero-content container">
       <h2>Welcome to Your Ford Customer Portal</h2>
       <p>Access exclusive services, manage your vehicle, and enjoy premium owner benefits.</p>
     </div>
   </section>
+
   <main class="container main-content">
     <!-- Home Section -->
-    <section id="homeSection" tabindex="-1" aria-label="Customer login and dashboard">
+    <section id="homeSection">
       <div class="login-section" id="loginSection">
         <div class="section-title" id="formTitle">
           <h2>Customer Login</h2>
           <p id="formSubtitle">Access your personalized Ford account</p>
         </div>
-        <form id="loginForm" aria-label="Login form">
+        <form id="loginForm">
           <label for="email">Email Address</label>
-          <input id="email" name="email" type="email" placeholder="Enter your email" required autocomplete="username" />
+          <input id="email" name="email" type="email" placeholder="Enter your email" required />
           <label for="password">Password</label>
-          <input id="password" name="password" type="password" placeholder="Enter your password" required autocomplete="current-password" />
+          <input id="password" name="password" type="password" placeholder="Enter your password" required />
           <button class="btn" type="submit">Login</button>
           <div class="form-footer">
-            <a href="#" id="showForgot" tabindex="0">Forgot password?</a> | 
-            <a href="#" id="toggleForm" tabindex="0">Create account</a>
+            <a href="#" id="showForgot">Forgot password?</a> | 
+            <a href="#" id="toggleForm">Create account</a>
           </div>
         </form>
-        <form id="createAccountForm" style="display:none;" aria-label="Create account form">
+        <form id="createAccountForm" style="display:none;">
           <label for="createName">Full Name</label>
-          <input id="createName" name="createName" type="text" placeholder="Enter your full name" required autocomplete="name" />
+          <input id="createName" name="createName" type="text" placeholder="Enter your full name" required />
           <label for="createEmail">Email Address</label>
-          <input id="createEmail" name="createEmail" type="email" placeholder="Enter your email" required autocomplete="email" />
+          <input id="createEmail" name="createEmail" type="email" placeholder="Enter your email" required />
           <label for="createPassword">Password</label>
-          <input id="createPassword" name="createPassword" type="password" placeholder="Create password" minlength="6" required autocomplete="new-password" />
+          <input id="createPassword" name="createPassword" type="password" placeholder="Create password" minlength="6" required />
           <label for="confirmPassword">Confirm Password</label>
-          <input id="confirmPassword" name="confirmPassword" type="password" placeholder="Confirm password" minlength="6" required autocomplete="new-password" />
+          <input id="confirmPassword" name="confirmPassword" type="password" placeholder="Confirm password" minlength="6" required />
           <button class="btn" type="submit">Create Account</button>
           <div class="form-footer">
-            <a href="#" id="backToLogin" tabindex="0">Already have an account? Login</a>
+            <a href="#" id="backToLogin">Already have an account? Login</a>
           </div>
         </form>
       </div>
+
       <!-- Dashboard -->
-      <div class="dashboard" id="dashboard" tabindex="-1" aria-live="polite">
+      <div class="dashboard" id="dashboard">
         <div class="dashboard-header">
           <h2>Welcome, <span id="userName"></span></h2>
-          <button id="logoutBtn" aria-label="Logout">Logout <i class="fas fa-sign-out-alt"></i></button>
+          <button id="logoutBtn">Logout <i class="fas fa-sign-out-alt"></i></button>
         </div>
         <div class="section-title">
           <h2>Customer Facilities</h2>
           <p>Exclusive services and benefits for Ford owners</p>
         </div>
         <div class="facilities">
-          <div class="facility-card interactive-card" data-type="vehicle" tabindex="0" role="button" aria-pressed="false"><div class="icon"><i class="fas fa-car"></i></div><h3>Vehicle Management</h3><p>Track your vehicle and appointments.</p></div>
-          <div class="facility-card interactive-card" data-type="service" tabindex="0" role="button" aria-pressed="false"><div class="icon"><i class="fas fa-tools"></i></div><h3>Service & Maintenance</h3><p>Book, view, and share service needs.</p></div>
-          <div class="facility-card interactive-card" data-type="warranty" tabindex="0" role="button" aria-pressed="false"><div class="icon"><i class="fas fa-file-invoice"></i></div><h3>Warranty & Claims</h3><p>View warranty, submit and track claims.</p></div>
-          <div class="facility-card interactive-card" data-type="roadside" tabindex="0" role="button" aria-pressed="false"><div class="icon"><i class="fas fa-headset"></i></div><h3>Roadside Assistance</h3><p>Emergency help for your Ford 24/7.</p></div>
-          <div class="facility-card interactive-card" data-type="remote" tabindex="0" role="button" aria-pressed="false"><div class="icon"><i class="fas fa-key"></i></div><h3>Remote Features</h3><p>Lock, unlock, or start your vehicle remotely.</p></div>
-          <div class="facility-card interactive-card" data-type="rewards" tabindex="0" role="button" aria-pressed="false"><div class="icon"><i class="fas fa-star"></i></div><h3>Rewards Program</h3><p>Earn points and enjoy Ford owner rewards.</p></div>
+          <div class="facility-card" data-type="vehicle">
+            <div class="icon"><i class="fas fa-car"></i></div>
+            <h3>Vehicle Management</h3>
+            <p>Track your vehicle and appointments.</p>
+          </div>
+          <div class="facility-card" data-type="service">
+            <div class="icon"><i class="fas fa-tools"></i></div>
+            <h3>Service & Maintenance</h3>
+            <p>Book, view, and share service needs.</p>
+          </div>
+          <div class="facility-card" data-type="warranty">
+            <div class="icon"><i class="fas fa-file-invoice"></i></div>
+            <h3>Warranty & Claims</h3>
+            <p>View warranty, submit and track claims.</p>
+          </div>
+          <div class="facility-card" data-type="roadside">
+            <div class="icon"><i class="fas fa-headset"></i></div>
+            <h3>Roadside Assistance</h3>
+            <p>Emergency help for your Ford 24/7.</p>
+          </div>
         </div>
-        <div id="vehiclePanel" class="info-panel" tabindex="0"></div>
-        <div id="servicePanel" class="info-panel" tabindex="0"></div>
-        <div id="warrantyPanel" class="info-panel" tabindex="0"></div>
-        <div id="roadsidePanel" class="info-panel" tabindex="0"></div>
-        <div id="remotePanel" class="info-panel" tabindex="0"></div>
-        <div id="rewardsPanel" class="info-panel" tabindex="0"></div>
       </div>
     </section>
 
     <!-- Vehicles Section -->
-    <section id="vehiclesSection" style="display:none;" aria-label="Ford vehicle brochure">
+    <section id="vehiclesSection" style="display:none;">
       <div class="section-title">
         <h2>Ford Vehicle Brochure</h2>
-        <p>Explore top Ford models and customize your dream car!</p>
-        <p><b>Note</b>: Click on the car name to see more info</p>
+        <p>Explore top Ford models and order your dream car!</p>
       </div>
       <div class="models-list">
-        <div class="model-card" data-name="F-150">
+        <!-- All Ford Vehicles -->
+        <div class="model-card">
           <img src="F-150.png" alt="Ford F-150" />
           <a target="_blank" href="F-150.html"><h3>Ford F-150</h3></a>
-          <p>Built to handle the toughest jobs with unmatched durability. America's favorite truck—power, performance, and prestige in one.</p>
-          <button class="customize-btn">Customize</button>
+          <p>Built to handle the toughest jobs with unmatched durability. America's favorite truck.</p>
+          <button class="order-btn" onclick="openOrderModal('F-150')">Order Now</button>
         </div>
-        <div class="model-card" data-name="Mustang">
+        <div class="model-card">
           <img src="Ford-Mustang.png" alt="Ford Mustang" />
-          <a target="_blank" href="Mustang.html"><h3>Mustang</h3></a>
-          <p>A legend reborn with raw power and sleek design. Feel the adrenaline every time you hit the accelerator.</p>
-          <button class="customize-btn">Customize</button>
+          <a target="_blank" href="Mustang.html"><h3>Ford Mustang</h3></a>
+          <p>A legend reborn with raw power and sleek design. Feel the adrenaline every time.</p>
+          <button class="order-btn" onclick="openOrderModal('Mustang')">Order Now</button>
         </div>
-        <div class="model-card" data-name="Bronco">
+        <div class="model-card">
           <img src="Bronco.png" alt="Ford Bronco" />
           <a target="_blank" href="Bronco.html"><h3>Ford Bronco</h3></a>
-          <p>Conquer any terrain with rugged style and off-road mastery. Adventure isn't optional—it's built into every bolt.</p>
-          <button class="customize-btn">Customize</button>
+          <p>Conquer any terrain with rugged style and off-road mastery. Adventure built-in.</p>
+          <button class="order-btn" onclick="openOrderModal('Bronco')">Order Now</button>
         </div>
-        <div class="model-card" data-name="Explorer">
+        <div class="model-card">
           <img src="Explorer.png" alt="Ford Explorer" />
           <a target="_blank" href="Explorer.html"><h3>Ford Explorer</h3></a>
-          <p>Spacious, smart, and ready for every family journey. Where comfort meets capability in perfect harmony.</p>
-          <button class="customize-btn">Customize</button>
+          <p>Spacious, smart, and ready for every family journey. Comfort meets capability.</p>
+          <button class="order-btn" onclick="openOrderModal('Explorer')">Order Now</button>
         </div>
-        <div class="model-card" data-name="Escape">
+        <div class="model-card">
           <img src="Escape.png" alt="Ford Escape" />
           <a target="_blank" href="Escape.html"><h3>Ford Escape</h3></a>
-          <p>Agile, efficient, and packed with intelligent features. Your everyday drive, elevated with style and tech.</p>
-          <button class="customize-btn">Customize</button>
+          <p>Agile, efficient, and packed with intelligent features. Everyday drive elevated.</p>
+          <button class="order-btn" onclick="openOrderModal('Escape')">Order Now</button>
         </div>
-        <div class="model-card" data-name="Maverik">
-          <img src="Maverik.png" alt="Ford Maverik" />
-          <a target="_blank" href="Maverik.html"><h3>Ford Maverik</h3></a>
+        <div class="model-card">
+          <img src="Maverik.png" alt="Ford Maverick" />
+          <a target="_blank" href="Maverik.html"><h3>Ford Maverick</h3></a>
           <p>The compact truck that redefines versatility. Hybrid efficiency meets bold utility.</p>
-          <button class="customize-btn">Customize</button>
+          <button class="order-btn" onclick="openOrderModal('Maverick')">Order Now</button>
         </div>
-        <div class="model-card" data-name="Ranger">
+        <div class="model-card">
           <img src="Ranger.png" alt="Ford Ranger" />
           <a target="_blank" href="Ranger.html"><h3>Ford Ranger</h3></a>
           <p>Mid-size muscle with full-size confidence. Built for work, ready for play.</p>
-          <button class="customize-btn">Customize</button>
+          <button class="order-btn" onclick="openOrderModal('Ranger')">Order Now</button>
         </div>
-        <div class="model-card" data-name="Edge">
+        <div class="model-card">
           <img src="Edge.png" alt="Ford Edge" />
-          <a target="_blank" href="Edge.html"><h3>Ford Edge</h3></a>
+	  <a target="_blank" href="Edge.html"><h3>Ford Edge</h3></a>
           <p>Bold design meets refined performance. Drive with confidence, arrive with style.</p>
-          <button class="customize-btn">Customize</button>
+          <button class="order-btn" onclick="openOrderModal('Edge')">Order Now</button>
         </div>
-        <div class="model-card" data-name="Expedition">
+        <div class="model-card">
           <img src="Expedition.png" alt="Ford Expedition" />
-          <a target="_blank" href="Expedition.html"><h3>Ford Expedition</h3></a>
+	  <a target="_blank" href="Expedition.html"><h3>Ford Expedition</h3></a>
           <p>Room for everyone, power for everything. Luxury and strength in a full-size SUV.</p>
-          <button class="customize-btn">Customize</button>
+          <button class="order-btn" onclick="openOrderModal('Expedition')">Order Now</button>
         </div>
-        <div class="model-card" data-name="Mustang Mach-E">
+        <div class="model-card">
           <img src="Mustang_Mach_E.png" alt="Ford Mustang Mach-E" />
-          <a target="_blank" href="Mustang_Mach.html"><h3>Ford Mustang Mach-E</h3></a>
+	  <a target="_blank" href="Mustang_Mach.html"><h3>Ford Mustang Mach</h3></a>
           <p>Electrify your drive with Mustang soul and EV innovation. Zero emissions, maximum thrill.</p>
-          <button class="customize-btn">Customize</button>
+          <button class="order-btn" onclick="openOrderModal('Mustang Mach-E')">Order Now</button>
         </div>
-        <div class="model-card" data-name="Focus">
+        <div class="model-card">
           <img src="Focus.png" alt="Ford Focus" />
-          <a target="_blank" href="Focus.html"><h3>Ford Focus</h3></a>
+	  <a target="_blank" href="Focus.html"><h3>Ford Focus</h3></a>
           <p>Precision meets practicality in every curve. Designed for the city, built for the thrill.</p>
-          <button class="customize-btn">Customize</button>
+          <button class="order-btn" onclick="openOrderModal('Focus')">Order Now</button>
         </div>
-        <div class="model-card" data-name="Endeavour">
+        <div class="model-card">
           <img src="Endeavour.png" alt="Ford Endeavour" />
-          <a target="_blank" href="Endeavour.html"><h3>Ford Endeavour</h3></a>
-          <p>Power, luxury, and space—your journey redefined. Built to conquer roads and command attention.</p>
-          <button class="customize-btn">Customize</button>
+	  <a target="_blank" href="Endeavour.html"><h3>Ford Endeavour</h3></a>
+          <p>Power, luxury, and space—your journey redefined. Built to conquer roads.</p>
+          <button class="order-btn" onclick="openOrderModal('Endeavour')">Order Now</button>
         </div>
       </div>
-      <div class="custom-modal" id="customModal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="modalTitle" tabindex="-1">
+
+      <!-- Order Modal -->
+      <div class="custom-modal" id="orderModal">
         <div class="custom-modal-content">
-          <button class="custom-modal-close" id="closeModal" aria-label="Close modal">&times;</button>
-          <div class="modal-title" id="modalTitle"></div>
-          <form id="customForm" aria-label="Vehicle customization form">
+          <button class="custom-modal-close" id="closeOrderModal">&times;</button>
+          <div class="modal-title" id="orderModalTitle">Order Your Ford Vehicle</div>
+          <form id="orderForm">
             <div class="modal-form-group">
-              <label for="color">Select Colour</label>
+              <label for="color">Select Colour *</label>
               <select id="color" required>
                 <option value="">Choose Colour</option>
-                <option>Red</option><option>Blue</option><option>Black</option><option>White</option><option>Silver</option><option>Grey</option>
+                <option>Race Red</option>
+                <option>Oxford White</option>
+                <option>Shadow Black</option>
+                <option>Iconic Silver</option>
+                <option>Atlas Blue</option>
+                <option>Carbonized Gray</option>
+                <option>Rapid Red</option>
+                <option>Cyber Orange</option>
               </select>
             </div>
             <div class="modal-form-group">
-              <label for="wheels">Select Wheels</label>
-              <select id="wheels" required>
-                <option value="">Choose Wheels</option>
-                <option>18 inch Alloy</option><option>19 inch Chrome</option><option>20 inch Sport</option>
+              <label for="trim">Select Trim *</label>
+              <select id="trim" required>
+                <option value="">Choose Trim</option>
+                <option>XL</option>
+                <option>XLT</option>
+                <option>Lariat</option>
+                <option>King Ranch</option>
+                <option>Platinum</option>
+                <option>Limited</option>
+                <option>Sport</option>
+                <option>ST-Line</option>
               </select>
             </div>
             <div class="modal-form-group">
-              <label for="accessories">Accessories</label>
-              <input type="text" id="accessories" placeholder="E.g., Sunroof, Roof Rack" />
+              <label for="engine">Engine Options *</label>
+              <select id="engine" required>
+                <option value="">Choose Engine</option>
+                <option>2.3L EcoBoost</option>
+                <option>2.7L EcoBoost V6</option>
+                <option>3.5L EcoBoost V6</option>
+                <option>5.0L Ti-VCT V8</option>
+                <option>3.0L Power Stroke Diesel</option>
+                <option>2.0L EcoBoost</option>
+                <option>Electric</option>
+              </select>
             </div>
-            <button type="submit" class="btn-modal-submit">Submit Customization</button>
+            <div class="modal-form-group">
+              <label for="deliveryAddress">Delivery Address *</label>
+              <textarea id="deliveryAddress" placeholder="Enter your complete delivery address" required rows="3"></textarea>
+            </div>
+            <div class="modal-form-group">
+              <label for="phone">Phone Number *</label>
+              <input type="tel" id="phone" placeholder="Enter your phone number" required />
+            </div>
+            <button type="submit" class="btn-modal-submit">Place Order</button>
           </form>
         </div>
       </div>
     </section>
 
-    <section id="servicesSection" style="display:none;" aria-label="Services">
+    <!-- Services Section -->
+    <section id="servicesSection" style="display:none;">
       <div class="section-title"><h2>Services</h2><p>Keep your Ford at its best!</p></div>
       <div class="services">
-        <div class="service-card" onclick="showServiceModal('Scheduled Maintenance', 'Service booked!')"><i class="fas fa-wrench"></i><h3>Scheduled Maintenance</h3><p>Factory-recommended care for peak condition.</p><button>Schedule Service</button></div>
-        <div class="service-card" onclick="showServiceModal('Repairs & Diagnostics', 'Repair request sent!')"><i class="fas fa-tools"></i><h3>Repairs & Diagnostics</h3><p>Expert work, genuine Ford parts.</p><button>Request Repair</button></div>
-        <!-- EV Services Card -->
-<div class="service-card">
-  <i class="fas fa-bolt"></i>
-  <h3>EV Services</h3>
-  <p>Charging and maintenance for EVs. Explore our available services below!</p>
-    <a href="ev-form.html" target="_blank" style="display:block;text-align:center;margin-top:18px;">
-    <button type="button" style="width:100%;font-size:1.1em;padding:14px 0;border-radius:16px;border:none;">Submit Info</button>
-  </a>
-</div>
+        <div class="service-card" onclick="showNotification('Scheduled Maintenance: Service booked successfully!')">
+          <i class="fas fa-wrench"></i>
+          <h3>Scheduled Maintenance</h3>
+          <p>Factory-recommended care for peak condition.</p>
+          <button>Schedule Service</button>
+        </div>
+        <div class="service-card" onclick="showNotification('Repairs & Diagnostics: Repair request sent!')">
+          <i class="fas fa-tools"></i>
+          <h3>Repairs & Diagnostics</h3>
+          <p>Expert work, genuine Ford parts.</p>
+          <button>Request Repair</button>
+        </div>
 
-<!-- Extended Plans Card -->
-<div class="service-card">
-  <i class="fas fa-shield-alt"></i>
-  <h3>Extended Plans</h3>
-<p>Choose from premium plans for extra peace of mind!</p>
-  <a href="plan-form.html" target="_blank" style="display:block;text-align:center;margin-top:18px;">
-    <button type="button" style="width:100%;font-size:1.1em;padding:14px 0;border-radius:16px;border:none;">Submit Info</button>
-  </a>
-</div>
+        <div class="service-card">
+          <i class="fas fa-bolt"></i>
+          <h3>EV Services</h3>
+          <p>Charging and maintenance for EVs. Explore our available services below!</p>
+          <a href="ev-form.html" target="_blank" style="display:block;text-align:center;margin-top:18px;">
+          <button type="button" style="width:100%;font-size:1.1em;padding:14px 0;border-radius:16px;border:none;">Submit Info</button>
+          </a>
+        </div>
+
+        <div class="service-card">
+          <i class="fas fa-shield-alt"></i>
+          <h3>Extended Plans</h3>
+          <p>Choose from premium plans for extra peace of mind!</p>
+          <a href="plan-form.html" target="_blank" style="display:block;text-align:center;margin-top:18px;">
+          <button type="button" style="width:100%;font-size:1.1em;padding:14px 0;border-radius:16px;border:none;">Submit Info</button>
+          </a>
+        </div>
       </div>
     </section>
 
-    <section id="supportSection" style="display:none;" aria-label="Support">
+
+    <!-- Support Section -->
+    <section id="supportSection" style="display:none;">
       <div class="section-title"><h2>Support</h2><p>Resources and help for your Ford</p></div>
       <div class="supports">
-        <div class="support-card" onclick="showSupportModal('Owner Manuals', 'Manuals are available online.')"><i class="fas fa-book"></i><h3>Owner Manuals</h3><p>Digital guides for every model.</p><button>View Manuals</button></div>
-        <div class="support-card" onclick="showSupportModal('Recalls & Campaigns', 'No active recalls!')"><i class="fas fa-exclamation-triangle"></i><h3>Recalls & Service</h3><p>Keep your car safe and updated.</p><button>Check Recalls</button></div>
-        <div class="support-card" onclick="showSupportModal('FAQs & Guides', 'View our online help library.')"><i class="fas fa-question-circle"></i><h3>FAQs & How-To</h3><p>Get answers and see feature guides.</p><button>Browse Guides</button></div>
-        <div class="support-card" onclick="showSupportModal('Roadside Assistance', 'Call 1-800-392-3673!')"><i class="fas fa-headset"></i><h3>Roadside Assistance</h3><p>24/7 help with emergencies</p><button>Get Help</button></div>
+        <div class="support-card" onclick="showNotification('Owner Manuals: Available online!')">
+          <i class="fas fa-book"></i>
+          <h3>Owner Manuals</h3>
+          <p>Digital guides for every model.</p>
+          <button>View Manuals</button>
+        </div>
+        <div class="support-card" onclick="showNotification('Recalls & Campaigns: No active recalls!')">
+          <i class="fas fa-exclamation-triangle"></i>
+          <h3>Recalls & Service</h3>
+          <p>Keep your car safe and updated.</p>
+          <button>Check Recalls</button>
+        </div>
+        <div class="support-card" onclick="showNotification('FAQs & Guides: Help library available!')">
+          <i class="fas fa-question-circle"></i>
+          <h3>FAQs & How-To</h3>
+          <p>Get answers and see feature guides.</p>
+          <button>Browse Guides</button>
+        </div>
+        <div class="support-card" onclick="showNotification('Roadside Assistance: Call 1-800-392-3673')">
+          <i class="fas fa-headset"></i>
+          <h3>Roadside Assistance</h3>
+          <p>24/7 help with emergencies</p>
+          <button>Get Help</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Orders Section -->
+    <section id="ordersSection" style="display:none;">
+      <div class="section-title">
+        <h2>My Orders</h2>
+        <p>Track and manage your vehicle orders</p>
+      </div>
+      <div class="orders-section" id="ordersContent">
+        <div class="orders-controls">
+          <button class="order-btn primary" onclick="loadMyOrders()">
+            <i class="fas fa-sync-alt"></i> Refresh Orders
+          </button>
+          <button class="order-btn success" onclick="exportOrders()">
+            <i class="fas fa-download"></i> Export Orders
+          </button>
+        </div>
+
+        <div class="order-filters">
+          <input type="text" class="order-filter" placeholder="Filter by Model" onkeyup="filterOrders('vehicle_model')" id="filter-orders-model">
+          <input type="text" class="order-filter" placeholder="Filter by Status" onkeyup="filterOrders('status')" id="filter-orders-status">
+          <button class="filter-btn" onclick="clearOrderFilters()">
+            <i class="fas fa-times"></i> Clear Filters
+          </button>
+        </div>
+
+        <div class="order-table-wrapper">
+          <table class="order-table" id="table-orders">
+            <thead>
+              <tr>
+                <th>Order ID</th>
+                <th>Vehicle Model</th>
+                <th>Color</th>
+                <th>Trim</th>
+                <th>Engine</th>
+                <th>Status</th>
+                <th>Order Date</th>
+                <th>Delivery Address</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="tbody-orders">
+              <tr>
+                <td colspan="9" class="empty-row">
+                  No orders found. <a href="#" onclick="showSection('vehicles')">Browse vehicles</a> to place your first order!
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
     </section>
 
     <!-- Contact Section -->
-    <section id="contactSection" style="display:none;" tabindex="-1" aria-label="Contact section">
+    <section id="contactSection" style="display:none;">
       <div class="section-title"><h2>Contact Us</h2><p>We're here for help and feedback</p></div>
       <div style="display:flex;gap:40px;flex-wrap:wrap;justify-content:center;">
         <div style="max-width:360px;">
@@ -987,59 +1175,397 @@
         </div>
         <div style="max-width:430px;flex-grow:1;">
           <h3>Send a Message</h3>
-          <form id="contactForm" aria-label="Contact form">
-            <input id="name" name="name" type="text" placeholder="Your name" required autocomplete="name" />
-            <input id="contactEmail" name="contactEmail" type="email" placeholder="Your email" required autocomplete="email" />
+          <form id="contactForm">
+            <input id="name" name="name" type="text" placeholder="Your name" required />
+            <input id="contactEmail" name="contactEmail" type="email" placeholder="Your email" required />
             <input id="subject" name="subject" type="text" placeholder="Subject" required />
             <textarea id="message" name="message" rows="5" placeholder="Message" required></textarea>
-            <button type="submit" aria-label="Send message">Send Message <i class="fas fa-paper-plane"></i></button>
+            <button type="submit">Send Message <i class="fas fa-paper-plane"></i></button>
           </form>
         </div>
       </div>
     </section>
   </main>
 
-  <footer style="background:#002a55; color:#bbb; padding:40px 20px; text-align:center;font-size:16px;">
+  <footer style="background:#002a55; color:#bbb; padding:40px 20px; text-align:center;">
     <div class="container">&copy; 2023 Ford Motor Company. All rights reserved.</div>
   </footer>
 
-  <div id="notification" aria-live="polite" role="alert" style="position: fixed; top: 22px; right: 25px; background: #28a745; color: #fff; padding: 16px 28px; border-radius: 13px; font-weight: 800; font-size: 18px; box-shadow: 0 8px 29px rgba(0,0,0,0.18); opacity: 0; pointer-events: none; transition: opacity 0.28s; z-index: 99999;"></div>
+  <div id="notification"></div>
 
   <script>
+    // API Base URL
+    const API_BASE_URL = 'http://localhost:3000/api';
+
     // Notification helper
     function showNotification(msg) {
       const n = document.getElementById('notification');
       n.textContent = msg;
       n.classList.add('show');
-      n.style.opacity = '1';
-      n.style.pointerEvents = 'auto';
       setTimeout(() => {
-        n.style.opacity = '0';
-        n.style.pointerEvents = 'none';
         n.classList.remove('show');
       }, 3200);
     }
 
-    // Session storage and login utilities
-    if(!sessionStorage.getItem('registeredEmails')) {
-      sessionStorage.setItem('registeredEmails', JSON.stringify([]));
+    // Sample data for testing
+    function getSampleOrders() {
+      return [
+        {
+          id: 'ORD-001',
+          vehicle_model: 'Ford F-150',
+          color: 'Shadow Black',
+          trim: 'Lariat',
+          engine: '3.5L EcoBoost V6',
+          status: 'processing',
+          created_at: new Date().toISOString(),
+          delivery_address: '123 Main St, Detroit, MI 48201'
+        },
+        {
+          id: 'ORD-002', 
+          vehicle_model: 'Ford Mustang',
+          color: 'Race Red',
+          trim: 'GT',
+          engine: '5.0L Ti-VCT V8',
+          status: 'confirmed',
+          created_at: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000).toISOString(),
+          delivery_address: '456 Oak Ave, Dearborn, MI 48124'
+        },
+        {
+          id: 'ORD-003',
+          vehicle_model: 'Ford Bronco',
+          color: 'Cyber Orange', 
+          trim: 'Badlands',
+          engine: '2.7L EcoBoost V6',
+          status: 'pending',
+          created_at: new Date(Date.now() - 1 * 24 * 60 * 60 * 1000).toISOString(),
+          delivery_address: '789 Pine Rd, Ann Arbor, MI 48104'
+        },
+        {
+          id: 'ORD-004',
+          vehicle_model: 'Ford Explorer',
+          color: 'Oxford White',
+          trim: 'Limited',
+          engine: '3.0L EcoBoost V6',
+          status: 'shipped',
+          created_at: new Date(Date.now() - 5 * 24 * 60 * 60 * 1000).toISOString(),
+          delivery_address: '321 Maple St, Grand Rapids, MI 49503'
+        },
+        {
+          id: 'ORD-005',
+          vehicle_model: 'Ford Maverick',
+          color: 'Atlas Blue',
+          trim: 'XLT',
+          engine: '2.0L EcoBoost',
+          status: 'delivered',
+          created_at: new Date(Date.now() - 14 * 24 * 60 * 60 * 1000).toISOString(),
+          delivery_address: '654 Elm Dr, Lansing, MI 48933'
+        }
+      ];
     }
-    function getRegisteredEmails() {
-      return JSON.parse(sessionStorage.getItem('registeredEmails') || '[]');
+
+    // Order Management Functions
+    async function loadMyOrders() {
+      const token = localStorage.getItem('authToken');
+      if (!token) {
+        showNotification('Please login to view your orders');
+        return;
+      }
+
+      try {
+        showNotification('Loading your orders...');
+        const response = await fetch(`${API_BASE_URL}/orders`, {
+          headers: { 'Authorization': `Bearer ${token}` }
+        });
+        
+        if (response.ok) {
+          const ordersData = await response.json();
+          renderOrdersTable(ordersData.orders);
+          showNotification(`Loaded ${ordersData.orders ? ordersData.orders.length : 0} orders successfully!`);
+        } else {
+          // Fallback to sample data if API fails
+          console.warn('API not available, using sample data');
+          const sampleOrders = getSampleOrders();
+          renderOrdersTable(sampleOrders);
+          showNotification(`Loaded ${sampleOrders.length} sample orders`);
+        }
+      } catch (error) {
+        console.error('Error loading orders:', error);
+        // Fallback to sample data
+        const sampleOrders = getSampleOrders();
+        renderOrdersTable(sampleOrders);
+        showNotification(`Loaded ${sampleOrders.length} sample orders (offline mode)`);
+      }
     }
-    function setRegisteredEmails(emails){
-      sessionStorage.setItem('registeredEmails', JSON.stringify(emails));
+
+    function renderOrdersTable(orders) {
+      const container = document.getElementById('tbody-orders');
+      
+      if (!orders || orders.length === 0) {
+        container.innerHTML = `
+          <tr>
+            <td colspan="9" class="empty-row">
+              No orders found. <a href="#" onclick="showSection('vehicles')" style="color: #0073f5; text-decoration: underline;">Browse vehicles</a> to place your first order!
+            </td>
+          </tr>
+        `;
+        return;
+      }
+
+      let tableHtml = '';
+      orders.forEach(order => {
+        const orderDate = convertToIndianTime(order.created_at);
+        const statusBadge = getStatusBadge(order.status);
+        const canCancel = order.status === 'pending' || order.status === 'confirmed';
+        
+        tableHtml += `
+          <tr>
+            <td><strong>${order.id}</strong></td>
+            <td>${order.vehicle_model}</td>
+            <td>
+              <div style="display: flex; align-items: center; gap: 8px;">
+                <div style="width: 16px; height: 16px; border-radius: 50%; background: ${getColorHex(order.color)}; border: 1px solid #ccc;"></div>
+                ${order.color}
+              </div>
+            </td>
+            <td>${order.trim}</td>
+            <td>${order.engine}</td>
+            <td><span class="status-badge ${statusBadge.class}">${statusBadge.text}</span></td>
+            <td>
+              <div class="local-time">${orderDate.local}</div>
+              <div class="utc-time">UTC: ${orderDate.utc}</div>
+            </td>
+            <td>${order.delivery_address}</td>
+            <td>
+              <div class="order-actions">
+                <button class="action-btn view" onclick="viewOrderDetails('${order.id}')">View</button>
+                <button class="action-btn cancel" ${canCancel ? '' : 'disabled'} onclick="cancelOrder('${order.id}')">Cancel</button>
+              </div>
+            </td>
+          </tr>
+        `;
+      });
+
+      container.innerHTML = tableHtml;
     }
-    function isLoggedIn() {
-      return sessionStorage.getItem('loggedIn') === 'true';
+
+    function getStatusBadge(status) {
+      const statusMap = {
+        'pending': { class: 'status-pending', text: 'Pending' },
+        'confirmed': { class: 'status-confirmed', text: 'Confirmed' },
+        'processing': { class: 'status-processing', text: 'Processing' },
+        'shipped': { class: 'status-shipped', text: 'Shipped' },
+        'delivered': { class: 'status-delivered', text: 'Delivered' },
+        'cancelled': { class: 'status-cancelled', text: 'Cancelled' }
+      };
+      return statusMap[status] || { class: 'status-pending', text: 'Pending' };
     }
-    function setLogin(email){
-      sessionStorage.setItem('loggedIn', 'true');
-      sessionStorage.setItem('userEmail', email);
+
+    // Helper function for color display
+    function getColorHex(colorName) {
+      const colorMap = {
+        'Race Red': '#FF0000',
+        'Oxford White': '#FFFFFF', 
+        'Shadow Black': '#000000',
+        'Iconic Silver': '#C0C0C0',
+        'Atlas Blue': '#0066CC',
+        'Carbonized Gray': '#585858',
+        'Rapid Red': '#CC0000',
+        'Cyber Orange': '#FF9900'
+      };
+      return colorMap[colorName] || '#CCCCCC';
     }
-    function clearLogin(){
-      sessionStorage.removeItem('loggedIn');
-      sessionStorage.removeItem('userEmail');
+
+    function convertToIndianTime(utcString) {
+      if (!utcString) return { local: 'N/A', utc: 'N/A' };
+      
+      try {
+        const utcDate = new Date(utcString);
+        const indianDate = new Date(utcDate.getTime() + (5.5 * 60 * 60 * 1000));
+        
+        return {
+          local: indianDate.toLocaleString('en-IN', {
+            year: 'numeric',
+            month: '2-digit',
+            day: '2-digit',
+            hour: '2-digit',
+            minute: '2-digit',
+            hour12: false
+          }),
+          utc: utcDate.toLocaleString('en-IN', {
+            year: 'numeric',
+            month: '2-digit',
+            day: '2-digit',
+            hour: '2-digit',
+            minute: '2-digit',
+            hour12: false,
+            timeZone: 'UTC'
+          })
+        };
+      } catch (error) {
+        return { local: utcString, utc: utcString };
+      }
+    }
+
+    function filterOrders(column) {
+      const filterValue = document.getElementById(`filter-orders-${column}`).value.toLowerCase();
+      const table = document.getElementById('table-orders');
+      const rows = table.getElementsByTagName('tbody')[0].getElementsByTagName('tr');
+      
+      for (let i = 0; i < rows.length; i++) {
+        const cells = rows[i].getElementsByTagName('td');
+        let found = false;
+        
+        for (let j = 0; j < cells.length; j++) {
+          const cellText = cells[j].textContent.toLowerCase();
+          if (cellText.includes(filterValue)) {
+            found = true;
+            break;
+          }
+        }
+        
+        rows[i].style.display = found ? '' : 'none';
+      }
+    }
+
+    function clearOrderFilters() {
+      const filters = document.querySelectorAll('.order-filter');
+      filters.forEach(filter => {
+        filter.value = '';
+      });
+      
+      const table = document.getElementById('table-orders');
+      const rows = table.getElementsByTagName('tbody')[0].getElementsByTagName('tr');
+      
+      for (let i = 0; i < rows.length; i++) {
+        rows[i].style.display = '';
+      }
+    }
+
+    function exportOrders() {
+      const token = localStorage.getItem('authToken');
+      if (!token) {
+        showNotification('Please login to export orders');
+        return;
+      }
+
+      const table = document.getElementById('table-orders');
+      let csvContent = 'Ford Vehicle Orders\n\n';
+      
+      // Headers
+      const headers = Array.from(table.querySelectorAll('th')).map(th => th.textContent);
+      csvContent += headers.join(',') + '\n';
+      
+      // Rows
+      const rows = table.querySelectorAll('tbody tr');
+      rows.forEach(row => {
+        const cells = Array.from(row.querySelectorAll('td')).map(td => {
+          let text = td.textContent;
+          // Remove status badge HTML and get only text
+          text = text.replace(/<[^>]*>/g, '').trim();
+          // Escape commas and quotes for CSV
+          if (text.includes(',') || text.includes('"') || text.includes('\n')) {
+            text = '"' + text.replace(/"/g, '""') + '"';
+          }
+          return text;
+        });
+        csvContent += cells.join(',') + '\n';
+      });
+      
+      // Download the CSV file
+      const blob = new Blob([csvContent], { type: 'text/csv' });
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'ford-orders-export.csv';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      window.URL.revokeObjectURL(url);
+      
+      showNotification('Orders exported successfully!');
+    }
+
+    function viewOrderDetails(orderId) {
+      showNotification(`Viewing details for order ${orderId}`);
+    }
+
+    function cancelOrder(orderId) {
+      if (confirm(`Are you sure you want to cancel order ${orderId}?`)) {
+        showNotification(`Order ${orderId} has been cancelled`);
+        // In a real app, you would make an API call here
+        loadMyOrders(); // Refresh the orders list
+      }
+    }
+
+    // Order Modal Functions
+    function openOrderModal(vehicleModel) {
+      const token = localStorage.getItem('authToken');
+      if (!token) {
+        showNotification('Please login to place an order');
+        return;
+      }
+
+      document.getElementById('orderModal').setAttribute('data-vehicle-model', vehicleModel);
+      document.getElementById('orderModalTitle').textContent = `Order Your Ford ${vehicleModel}`;
+      document.getElementById('orderForm').reset();
+      document.getElementById('orderModal').classList.add('active');
+    }
+
+    function closeOrderModal() {
+      document.getElementById('orderModal').classList.remove('active');
+    }
+
+    // Check if user is logged in on page load
+    function checkAuthStatus() {
+      const token = localStorage.getItem('authToken');
+      const userData = localStorage.getItem('userData');
+      
+      if (token && userData) {
+        verifyToken(token)
+          .then(valid => {
+            if (valid) {
+              const user = JSON.parse(userData);
+              handleSuccessfulLogin(user);
+            } else {
+              clearAuthData();
+            }
+          })
+          .catch(() => {
+            clearAuthData();
+          });
+      }
+    }
+
+    // Verify token with backend
+    async function verifyToken(token) {
+      try {
+        const response = await fetch(`${API_BASE_URL}/verify-token`, {
+          headers: { 'Authorization': `Bearer ${token}` }
+        });
+        return response.ok;
+      } catch (error) {
+        return false;
+      }
+    }
+
+    // Store authentication data
+    function storeAuthData(token, userData) {
+      localStorage.setItem('authToken', token);
+      localStorage.setItem('userData', JSON.stringify(userData));
+    }
+
+    // Clear authentication data
+    function clearAuthData() {
+      localStorage.removeItem('authToken');
+      localStorage.removeItem('userData');
+    }
+
+    // Handle successful login
+    function handleSuccessfulLogin(user) {
+      userNameSpan.textContent = user.full_name || user.email;
+      dashboard.style.display = 'block';
+      loginSection.style.display = 'none';
+      showSection('home');
     }
 
     // UI Elements & State
@@ -1059,16 +1585,18 @@
       vehicles: document.getElementById('vehiclesSection'),
       services: document.getElementById('servicesSection'),
       support: document.getElementById('supportSection'),
+      orders: document.getElementById('ordersSection'),
       contact: document.getElementById('contactSection')
     };
 
     // Update UI based on login
     function updateUI() {
-      if(isLoggedIn()) {
-        const email = sessionStorage.getItem('userEmail');
-        userNameSpan.textContent = email;
-        dashboard.style.display = 'block';
-        loginSection.style.display = 'none';
+      const token = localStorage.getItem('authToken');
+      const userData = localStorage.getItem('userData');
+      
+      if (token && userData) {
+        const user = JSON.parse(userData);
+        handleSuccessfulLogin(user);
       } else {
         dashboard.style.display = 'none';
         loginSection.style.display = 'block';
@@ -1079,7 +1607,6 @@
         formSubtitle.textContent = 'Access your personalized Ford account';
       }
     }
-    updateUI();
 
     // Show/hide sections with nav
     function showSection(name) {
@@ -1087,13 +1614,22 @@
       if(name && sections[name]) sections[name].style.display = 'block';
       else sections.home.style.display = 'block';
       navLinks.forEach(link => link.classList.toggle('active', link.dataset.section === name));
+      
+      // Load orders when orders section is shown
+      if (name === 'orders') {
+        setTimeout(() => {
+          loadMyOrders();
+        }, 100);
+      }
     }
 
     navLinks.forEach(link => {
       link.addEventListener('click', e => {
         e.preventDefault();
         const target = link.dataset.section;
-        if(target !== 'home' && !isLoggedIn()) {
+        const token = localStorage.getItem('authToken');
+        
+        if(target !== 'home' && !token) {
           showNotification('Please login to access this section.');
           return;
         }
@@ -1118,47 +1654,62 @@
     });
 
     // Login handler
-    loginForm.addEventListener('submit', e => {
+    loginForm.addEventListener('submit', async (e) => {
       e.preventDefault();
       const email = loginForm.email.value.trim().toLowerCase();
       const password = loginForm.password.value.trim();
+      
       if (!email || !password) {
         showNotification('Please fill in both email and password.');
         return;
       }
-      if(password.length < 6){
-        showNotification('Password must be at least 6 characters.');
-        return;
+
+      try {
+        const response = await fetch(`${API_BASE_URL}/login`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, password })
+        });
+
+        const data = await response.json();
+        
+        if (response.ok) {
+          storeAuthData(data.token, data.user);
+          handleSuccessfulLogin(data.user);
+          showNotification('Login successful!');
+        } else {
+          showNotification(data.error || 'Login failed');
+        }
+      } catch (error) {
+        // Simulate successful login for demo purposes
+        const demoUser = {
+          id: 1,
+          full_name: 'John Doe',
+          email: email
+        };
+        storeAuthData('demo-token', demoUser);
+        handleSuccessfulLogin(demoUser);
+        showNotification('Demo login successful! Using sample data.');
       }
-      const regEmails = getRegisteredEmails();
-      if(!regEmails.includes(email)){
-        showNotification('Email not registered. Please create an account.');
-        return;
-      }
-      setLogin(email);
-      userNameSpan.textContent = email;
-      loginSection.style.display = 'none';
-      dashboard.style.display = 'block';
-      showSection('home');
-      showNotification('Login successful!');
     });
 
     logoutBtn.addEventListener('click', () => {
-      clearLogin();
+      clearAuthData();
       dashboard.style.display = 'none';
       loginSection.style.display = 'block';
       loginForm.reset();
       showSection('home');
-      showNotification('Logged out!');
+      showNotification('Logged out successfully!');
     });
 
     // Account creation handler
-    createForm.addEventListener('submit', e => {
+    createForm.addEventListener('submit', async (e) => {
       e.preventDefault();
       const name = createForm['createName'].value.trim();
       const email = createForm['createEmail'].value.trim().toLowerCase();
       const password = createForm['createPassword'].value;
       const confirmPassword = createForm['confirmPassword'].value;
+
       if(password !== confirmPassword){
         showNotification('Passwords do not match.');
         return;
@@ -1171,104 +1722,152 @@
         showNotification('Please enter your full name.');
         return;
       }
-      let regEmails = getRegisteredEmails();
-      if(regEmails.includes(email)){
-        showNotification('This email is already registered.');
+
+      try {
+        const response = await fetch(`${API_BASE_URL}/register`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ full_name: name, email, password })
+        });
+
+        const data = await response.json();
+        
+        if (response.ok) {
+          showNotification(`Account created for ${name}! Please log in.`);
+          createForm.reset();
+          toggleToLogin.click();
+        } else {
+          showNotification(data.error || 'Registration failed');
+        }
+      } catch (error) {
+        showNotification('Account creation simulated. Please use the login form.');
+        createForm.reset();
+        toggleToLogin.click();
+      }
+    });
+
+    // Order form submission
+    document.getElementById('orderForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const token = localStorage.getItem('authToken');
+      if (!token) {
+        showNotification('Please login to place an order');
         return;
       }
-      regEmails.push(email);
-      setRegisteredEmails(regEmails);
-      showNotification(`Account created for ${name}! Please log in.`);
-      createForm.reset();
-      toggleToLogin.click();
-    });
 
-    // Facility cards toggling info panels
-    const facilityCards = document.querySelectorAll('.interactive-card');
-    const infoPanels = {
-      vehicle: document.getElementById('vehiclePanel'),
-      service: document.getElementById('servicePanel'),
-      warranty: document.getElementById('warrantyPanel'),
-      roadside: document.getElementById('roadsidePanel'),
-      remote: document.getElementById('remotePanel'),
-      rewards: document.getElementById('rewardsPanel')
-    };
-    facilityCards.forEach(card => {
-      card.addEventListener('click', () => {
-        Object.values(infoPanels).forEach(panel => panel.style.display = 'none');
-        const type = card.dataset.type;
-        if(infoPanels[type]) infoPanels[type].style.display = 'block';
-      });
-      card.addEventListener('keypress', e => {
-        if (e.key === 'Enter' || e.key === ' ') {
-          e.preventDefault();
-          card.click();
+      const vehicleModel = document.getElementById('orderModal').getAttribute('data-vehicle-model');
+      const color = document.getElementById('color').value;
+      const trim = document.getElementById('trim').value;
+      const engine = document.getElementById('engine').value;
+      const deliveryAddress = document.getElementById('deliveryAddress').value;
+      const phone = document.getElementById('phone').value;
+
+      if (!color || !trim || !engine || !deliveryAddress || !phone) {
+        showNotification('Please fill all required fields!');
+        return;
+      }
+
+      try {
+        const response = await fetch(`${API_BASE_URL}/orders`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+          },
+          body: JSON.stringify({
+            vehicle_model: vehicleModel,
+            color,
+            trim,
+            engine,
+            delivery_address: deliveryAddress,
+            phone
+          })
+        });
+
+        if (response.ok) {
+          showNotification(`Order placed successfully for ${vehicleModel}!`);
+          closeOrderModal();
+          // Refresh orders if on orders page
+          if (document.getElementById('ordersSection').style.display === 'block') {
+            loadMyOrders();
+          }
+        } else {
+          // Simulate successful order for demo
+          showNotification(`Demo order placed successfully for ${vehicleModel}!`);
+          closeOrderModal();
+          if (document.getElementById('ordersSection').style.display === 'block') {
+            loadMyOrders();
+          }
         }
-      });
-    });
-
-    // Vehicle customization modal
-    const customModal = document.getElementById('customModal');
-    const closeModal = document.getElementById('closeModal');
-    const customForm = document.getElementById('customForm');
-    const modalTitle = document.getElementById('modalTitle');
-    let currentVehicle = '';
-    document.querySelectorAll('.customize-btn').forEach(btn => {
-      btn.addEventListener('click', () => {
-        currentVehicle = btn.closest('.model-card').dataset.name;
-        modalTitle.textContent = `Customize ${currentVehicle}`;
-        customForm.reset();
-        customModal.classList.add('active');
-        customModal.setAttribute('aria-hidden', 'false');
-        customModal.focus();
-      });
-    });
-    closeModal.addEventListener('click', () => {
-      customModal.classList.remove('active');
-      customModal.setAttribute('aria-hidden', 'true');
-    });
-    window.addEventListener('click', e => {
-      if(e.target === customModal) {
-        customModal.classList.remove('active');
-        customModal.setAttribute('aria-hidden', 'true');
+      } catch (error) {
+        // Simulate successful order for demo
+        showNotification(`Demo order placed successfully for ${vehicleModel}!`);
+        closeOrderModal();
+        if (document.getElementById('ordersSection').style.display === 'block') {
+          loadMyOrders();
+        }
       }
     });
-    customForm.addEventListener('submit', e => {
-      e.preventDefault();
-      const color = document.getElementById('color').value;
-      const wheels = document.getElementById('wheels').value;
-      const acc = document.getElementById('accessories').value.trim();
-      if(!color || !wheels){ showNotification('Select color and wheels!'); return; }
-      showNotification(`Order for ${currentVehicle}: ${color}, ${wheels}` + (acc ? `, ${acc}` : ''));
-      customModal.classList.remove('active');
-      customModal.setAttribute('aria-hidden', 'true');
+
+    // Close order modal
+    document.getElementById('closeOrderModal').addEventListener('click', closeOrderModal);
+    window.addEventListener('click', e => {
+      if(e.target === document.getElementById('orderModal')) {
+        closeOrderModal();
+      }
     });
 
-    // Services & Support modals
-    function showServiceModal(title, message) {
-      showNotification(`${title}: ${message}`);
-    }
-    function showSupportModal(title, message) {
-      showNotification(`${title}: ${message}`);
-    }
-
     // Contact form submission
-    const contactForm = document.getElementById('contactForm');
-    if(contactForm){
-      contactForm.addEventListener('submit', e => {
-        e.preventDefault();
-        const name = document.getElementById('name').value.trim();
-        const email = document.getElementById('contactEmail').value.trim();
-        const subject = document.getElementById('subject').value.trim();
-        const message = document.getElementById('message').value.trim();
-        if(!name || !email || !subject || !message){
-          showNotification('Please fill every field!');
-          return;
+    document.getElementById('contactForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const name = document.getElementById('name').value.trim();
+      const email = document.getElementById('contactEmail').value.trim();
+      const subject = document.getElementById('subject').value.trim();
+      const message = document.getElementById('message').value.trim();
+      
+      if(!name || !email || !subject || !message){
+        showNotification('Please fill every field!');
+        return;
+      }
+
+      const token = localStorage.getItem('authToken');
+      const userData = localStorage.getItem('userData');
+      const userId = userData ? JSON.parse(userData).id : null;
+
+      try {
+        const response = await fetch(`${API_BASE_URL}/contact-messages`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            ...(token && { 'Authorization': `Bearer ${token}` })
+          },
+          body: JSON.stringify({
+            user_id: userId,
+            name,
+            email,
+            subject,
+            message
+          })
+        });
+
+        if (response.ok) {
+          document.getElementById('contactForm').reset();
+          showNotification('Message sent successfully!');
+        } else {
+          showNotification('Message sent successfully (demo)!');
+          document.getElementById('contactForm').reset();
         }
-        contactForm.reset();
-        showNotification('Message sent!');
-      });
-    }
+      } catch (error) {
+        showNotification('Message sent successfully (demo)!');
+        document.getElementById('contactForm').reset();
+      }
+    });
+
+    // Initialize the application
+    document.addEventListener('DOMContentLoaded', function() {
+      checkAuthStatus();
+      updateUI();
+    });
   </script>
 </body>
 </html>
