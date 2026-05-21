@@ -84,10 +84,19 @@ Ford-Customer-Portal/
 ├── index.html
 ├── style.css
 ├── script.js
-├── vehicle-pages/
-├── images/
-├── assets/
+├── vehicle-pages (html files)
+├── images
+├── Backend/
+    │
+    ├── ford - db file
+    ├── package.js
+    ├── package-lock.js
+    └── server.js
+├── assets
 └── README.md
+<img width="1858" height="888" alt="image" src="https://github.com/user-attachments/assets/475082e3-f516-422c-98c1-a15c88541ad6" />
+<img width="1364" height="484" alt="image" src="https://github.com/user-attachments/assets/2c849f4d-21c3-4928-86a0-0d7016dfe5f6" />
+
 ```
 
 ---
