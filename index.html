@@ -807,7 +807,7 @@
   <header>
     <div class="header-content container">
       <div class="logo">
-        <img src="https://www.ford.com/favicon.ico" alt="Ford Logo" />
+        <img src="ford_favicon.png" alt="Ford Logo" />
         <h1>Ford Customer Portal</h1>
       </div>
       <nav>
@@ -1206,147 +1206,84 @@
         n.classList.remove('show');
       }, 3200);
     }
-
-    // Sample data for testing
-    function getSampleOrders() {
-      return [
-        {
-          id: 'ORD-001',
-          vehicle_model: 'Ford F-150',
-          color: 'Shadow Black',
-          trim: 'Lariat',
-          engine: '3.5L EcoBoost V6',
-          status: 'processing',
-          created_at: new Date().toISOString(),
-          delivery_address: '123 Main St, Detroit, MI 48201'
-        },
-        {
-          id: 'ORD-002', 
-          vehicle_model: 'Ford Mustang',
-          color: 'Race Red',
-          trim: 'GT',
-          engine: '5.0L Ti-VCT V8',
-          status: 'confirmed',
-          created_at: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000).toISOString(),
-          delivery_address: '456 Oak Ave, Dearborn, MI 48124'
-        },
-        {
-          id: 'ORD-003',
-          vehicle_model: 'Ford Bronco',
-          color: 'Cyber Orange', 
-          trim: 'Badlands',
-          engine: '2.7L EcoBoost V6',
-          status: 'pending',
-          created_at: new Date(Date.now() - 1 * 24 * 60 * 60 * 1000).toISOString(),
-          delivery_address: '789 Pine Rd, Ann Arbor, MI 48104'
-        },
-        {
-          id: 'ORD-004',
-          vehicle_model: 'Ford Explorer',
-          color: 'Oxford White',
-          trim: 'Limited',
-          engine: '3.0L EcoBoost V6',
-          status: 'shipped',
-          created_at: new Date(Date.now() - 5 * 24 * 60 * 60 * 1000).toISOString(),
-          delivery_address: '321 Maple St, Grand Rapids, MI 49503'
-        },
-        {
-          id: 'ORD-005',
-          vehicle_model: 'Ford Maverick',
-          color: 'Atlas Blue',
-          trim: 'XLT',
-          engine: '2.0L EcoBoost',
-          status: 'delivered',
-          created_at: new Date(Date.now() - 14 * 24 * 60 * 60 * 1000).toISOString(),
-          delivery_address: '654 Elm Dr, Lansing, MI 48933'
+    
+      async function loadMyOrders() {
+        const token = localStorage.getItem('authToken');
+        if (!token) {
+          showNotification('Please login first');
+          return;
         }
-      ];
-    }
-
-    // Order Management Functions
-    async function loadMyOrders() {
-      const token = localStorage.getItem('authToken');
-      if (!token) {
-        showNotification('Please login to view your orders');
-        return;
-      }
-
-      try {
-        showNotification('Loading your orders...');
-        const response = await fetch(`${API_BASE_URL}/orders`, {
-          headers: { 'Authorization': `Bearer ${token}` }
-        });
-        
-        if (response.ok) {
-          const ordersData = await response.json();
-          renderOrdersTable(ordersData.orders);
-          showNotification(`Loaded ${ordersData.orders ? ordersData.orders.length : 0} orders successfully!`);
-        } else {
-          // Fallback to sample data if API fails
-          console.warn('API not available, using sample data');
-          const sampleOrders = getSampleOrders();
-          renderOrdersTable(sampleOrders);
-          showNotification(`Loaded ${sampleOrders.length} sample orders`);
+        try {
+          const response = await fetch(`${API_BASE_URL}/orders`,
+          {
+            headers: {
+              'Authorization': `Bearer ${token}`
+            }
+          });
+          const data = await response.json();
+          console.log("Orders API:",data);
+          if (response.ok){
+            renderOrdersTable(data.orders || []);
+          }
+          else {
+            showNotification('Could not load orders');
+            renderOrdersTable([]);
+          }
         }
-      } catch (error) {
-        console.error('Error loading orders:', error);
-        // Fallback to sample data
-        const sampleOrders = getSampleOrders();
-        renderOrdersTable(sampleOrders);
-        showNotification(`Loaded ${sampleOrders.length} sample orders (offline mode)`);
-      }
-    }
-
-    function renderOrdersTable(orders) {
-      const container = document.getElementById('tbody-orders');
-      
-      if (!orders || orders.length === 0) {
-        container.innerHTML = `
-          <tr>
-            <td colspan="9" class="empty-row">
-              No orders found. <a href="#" onclick="showSection('vehicles')" style="color: #0073f5; text-decoration: underline;">Browse vehicles</a> to place your first order!
-            </td>
-          </tr>
-        `;
-        return;
+        catch(error){
+          console.error(error);
+          showNotification('Server unavailable');
+          renderOrdersTable([]);
+        }
       }
 
-      let tableHtml = '';
-      orders.forEach(order => {
-        const orderDate = convertToIndianTime(order.created_at);
-        const statusBadge = getStatusBadge(order.status);
-        const canCancel = order.status === 'pending' || order.status === 'confirmed';
-        
-        tableHtml += `
-          <tr>
-            <td><strong>${order.id}</strong></td>
-            <td>${order.vehicle_model}</td>
-            <td>
-              <div style="display: flex; align-items: center; gap: 8px;">
-                <div style="width: 16px; height: 16px; border-radius: 50%; background: ${getColorHex(order.color)}; border: 1px solid #ccc;"></div>
-                ${order.color}
-              </div>
+      function renderOrdersTable(orders) {
+        const container = document.getElementById('tbody-orders');
+        if (!orders || orders.length === 0){
+          container.innerHTML = `<tr>
+          <td colspan="9" class="empty-row"> No orders found.
+            <a href="#" onclick="showSection('vehicles')" style=" color:#0073f5; text-decoration:underline;">Browse vehicles</a>
+            to place your first order.
             </td>
-            <td>${order.trim}</td>
-            <td>${order.engine}</td>
-            <td><span class="status-badge ${statusBadge.class}">${statusBadge.text}</span></td>
-            <td>
-              <div class="local-time">${orderDate.local}</div>
-              <div class="utc-time">UTC: ${orderDate.utc}</div>
-            </td>
-            <td>${order.delivery_address}</td>
-            <td>
-              <div class="order-actions">
-                <button class="action-btn view" onclick="viewOrderDetails('${order.id}')">View</button>
-                <button class="action-btn cancel" ${canCancel ? '' : 'disabled'} onclick="cancelOrder('${order.id}')">Cancel</button>
-              </div>
-            </td>
-          </tr>
-        `;
-      });
-
-      container.innerHTML = tableHtml;
-    }
+            </tr>`;
+            return;
+          }
+          let tableHtml = '';
+          orders.forEach(order => {
+            const orderDate =new Date(order.created_at).toLocaleString('en-IN',
+            {
+              day:'2-digit',
+              month:'2-digit',
+              year:'numeric',
+              hour:'2-digit',
+              minute:'2-digit'
+            });
+            const statusColor = {
+              pending:'#ff9800',
+              confirmed:'#2196f3',
+              processing:'#9c27b0',
+              shipped:'#4caf50',
+              delivered:'#2e7d32',
+              cancelled:'#f44336'
+            };
+            const color = statusColor[ order.status] || '#666';
+            const canCancel = order.status === 'pending' || order.status === 'confirmed';
+            tableHtml += `<tr>
+              <td> ORD-${order.id} </td>
+              <td> ${order.vehicle_model}</td>
+              <td>${order.color}</td>
+              <td>${order.trim}</td>
+              <td>${order.engine}</td>
+              <td><span style=" background:${color}; color:white; padding:6px 10px; border-radius:12px; font-size:12px; font-weight:bold;">${order.status}</span></td>
+              <td>${orderDate}</td>
+              <td>${order.delivery_address}</td>
+              <td><button onclick= "viewOrderDetails(${order.id})" style=" padding:6px 10px; border:none; background:#0073f5; color:white; border-radius:5px; cursor:pointer; margin-right:5px;">View</button>${canCancel?`
+                <button onclick= "cancelOrder(${order.id})" style="padding:6px 10px; border:none; background:#d32f2f; color:white; border-radius:5px; cursor:pointer;">Cancel</button> ` : ''}</td>
+                </tr>
+              `;
+            });
+            container.innerHTML = tableHtml;
+          }
 
     function getStatusBadge(status) {
       const statusMap = {
@@ -1489,13 +1426,39 @@
       showNotification(`Viewing details for order ${orderId}`);
     }
 
-    function cancelOrder(orderId) {
-      if (confirm(`Are you sure you want to cancel order ${orderId}?`)) {
-        showNotification(`Order ${orderId} has been cancelled`);
-        // In a real app, you would make an API call here
-        loadMyOrders(); // Refresh the orders list
+    async function cancelOrder(orderId){
+      const token = localStorage.getItem('authToken');
+      if(!token)return;
+      if(!confirm(`Cancel order ${orderId}?`)) 
+      return;
+    try{
+      const response = await fetch(`${API_BASE_URL}/orders/${orderId}`,
+      {
+        method:'PUT',
+        headers:{
+          'Authorization':
+          `Bearer ${token}`,
+          'Content-Type':
+          'application/json'
+        },
+        body:JSON.stringify({
+          status:'cancelled'
+        })
       }
+    );
+    if(response.ok){
+      showNotification('Order cancelled');
+      loadMyOrders();
     }
+    else{
+      showNotification('Failed to cancel order');
+    }
+  }
+  catch(error){
+    console.error(error);
+    showNotification('Server error');
+  }
+}
 
     // Order Modal Functions
     function openOrderModal(vehicleModel) {
@@ -1616,10 +1579,8 @@
       navLinks.forEach(link => link.classList.toggle('active', link.dataset.section === name));
       
       // Load orders when orders section is shown
-      if (name === 'orders') {
-        setTimeout(() => {
-          loadMyOrders();
-        }, 100);
+      if(name==='orders'){
+        loadMyOrders();
       }
     }
 
@@ -1739,10 +1700,9 @@
         } else {
           showNotification(data.error || 'Registration failed');
         }
-      } catch (error) {
-        showNotification('Account creation simulated. Please use the login form.');
-        createForm.reset();
-        toggleToLogin.click();
+      } catch(error){
+        console.error(error);
+        showNotification('Registration failed');
       }
     });
 
@@ -1784,28 +1744,20 @@
           })
         });
 
-        if (response.ok) {
+        if(response.ok){
           showNotification(`Order placed successfully for ${vehicleModel}!`);
+          document.getElementById('orderForm').reset();
           closeOrderModal();
-          // Refresh orders if on orders page
-          if (document.getElementById('ordersSection').style.display === 'block') {
-            loadMyOrders();
-          }
-        } else {
-          // Simulate successful order for demo
-          showNotification(`Demo order placed successfully for ${vehicleModel}!`);
-          closeOrderModal();
-          if (document.getElementById('ordersSection').style.display === 'block') {
-            loadMyOrders();
-          }
-        }
-      } catch (error) {
-        // Simulate successful order for demo
-        showNotification(`Demo order placed successfully for ${vehicleModel}!`);
-        closeOrderModal();
-        if (document.getElementById('ordersSection').style.display === 'block') {
           loadMyOrders();
+        } 
+        else{
+          const data = await response.json();
+          showNotification(data.error||'Order failed');
         }
+      } 
+      catch(error){
+        console.error(error);
+        showNotification('Backend unavailable');
       }
     });
 
@@ -1850,16 +1802,18 @@
           })
         });
 
-        if (response.ok) {
-          document.getElementById('contactForm').reset();
-          showNotification('Message sent successfully!');
-        } else {
-          showNotification('Message sent successfully (demo)!');
+        if(response.ok){
+          showNotification('Message sent');
           document.getElementById('contactForm').reset();
         }
-      } catch (error) {
-        showNotification('Message sent successfully (demo)!');
-        document.getElementById('contactForm').reset();
+        else{
+          const data = await response.json();
+          showNotification(data.error || 'Message failed');
+        }
+      } 
+      catch(error){
+        console.error(error);
+        showNotification('Server unavailable');
       }
     });
 
